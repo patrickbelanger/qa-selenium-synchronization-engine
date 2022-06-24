@@ -47,6 +47,7 @@ public abstract class ElementSynchronized {
 	ThreadLocal<Integer> synchronizationAttempts = new ThreadLocal<>();
 	
 	private static final String EXCEPTION = "Not implemented for %s";
+	private static final String SYNCHRONIZATION_PERFORMED_AGAINST = "Synchronization performed - Against: {}";
 	
 	@Getter(AccessLevel.PRIVATE)
 	static final Logger logger = LoggerFactory.getLogger(ElementSynchronized.class);
@@ -63,7 +64,7 @@ public abstract class ElementSynchronized {
 		this.synchronizationAttempts.set(synchronizationAttempts);
 	}
 	
-	public ElementSynchronized(WebDriver webDriver) {
+	protected ElementSynchronized(WebDriver webDriver) {
 		setWebDriver(webDriver);
 		setWait(new WebDriverWait(getWebDriver(), Duration.ofSeconds(synchronizationProperties.getTimeout())));
 	}
@@ -92,15 +93,29 @@ public abstract class ElementSynchronized {
 	protected <V, T> V performSynchronization(By by, ExpectedCondition<T> expectedCondition) {
 		for (int i = 0; i < synchronizationProperties.getMaximumRetryAttempts(); i++) {
 			try {
-				return (V) getWait().until((Function<? super WebDriver, Object>) expectedCondition);
+				V element = (V) getWait().until((Function<? super WebDriver, Object>) expectedCondition);
+				logSynchronizationElement(element);
+				return element;
 			} catch(TimeoutException e) {
 				setSynchronizationAttempts(i + 1);
 				logger.info(
-						String.format("Element synchronization error - Attempting to find the element using the expected condition: %s - Attempt #%s",
-								expectedCondition.toString(), i));
+						"Element synchronization error - Attempting to find the element using the expected condition: {} - Attempt #{}",
+								expectedCondition, i);
 			}
 		}
 		throw new ElementSynchronizationException(String.format("Unable to find element %s", by));
+	}
+	
+	private void logSynchronizationElement(Object object) {
+		if (object instanceof Alert) {
+			logger.info(SYNCHRONIZATION_PERFORMED_AGAINST, "Alert dialog");
+		} else if (object instanceof WebElement) {
+			logger.info(SYNCHRONIZATION_PERFORMED_AGAINST, "WebElement");
+		} else if (object instanceof List<?>) {
+			logger.info(SYNCHRONIZATION_PERFORMED_AGAINST, "List of WebElements");
+		} else {
+			logger.info(SYNCHRONIZATION_PERFORMED_AGAINST, "Condition");
+		}
 	}
 	
 	public abstract Alert getAlert();
