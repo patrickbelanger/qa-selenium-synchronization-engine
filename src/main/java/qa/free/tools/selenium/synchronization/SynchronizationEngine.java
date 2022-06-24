@@ -40,7 +40,7 @@ import qa.free.tools.selenium.synchronization.properties.SynchronizationProperti
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public abstract class ElementSynchronized {
+public abstract class SynchronizationEngine {
 	
 	ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 	ThreadLocal<WebDriverWait> wait = new ThreadLocal<>();
@@ -50,7 +50,7 @@ public abstract class ElementSynchronized {
 	private static final String SYNCHRONIZATION_PERFORMED_AGAINST = "Synchronization performed - Against: {}";
 	
 	@Getter(AccessLevel.PRIVATE)
-	static final Logger logger = LoggerFactory.getLogger(ElementSynchronized.class);
+	static final Logger logger = LoggerFactory.getLogger(SynchronizationEngine.class);
 	
 	@Getter(AccessLevel.PRIVATE)
 	static final SynchronizationProperties synchronizationProperties = 
@@ -64,7 +64,7 @@ public abstract class ElementSynchronized {
 		this.synchronizationAttempts.set(synchronizationAttempts);
 	}
 	
-	protected ElementSynchronized(WebDriver webDriver) {
+	protected SynchronizationEngine(WebDriver webDriver) {
 		setWebDriver(webDriver);
 		setWait(new WebDriverWait(getWebDriver(), Duration.ofSeconds(synchronizationProperties.getTimeout())));
 	}
@@ -99,10 +99,11 @@ public abstract class ElementSynchronized {
 			} catch(TimeoutException e) {
 				setSynchronizationAttempts(i + 1);
 				logger.info(
-						"Element synchronization error - Attempting to find the element using the expected condition: {} - Attempt #{}",
-								expectedCondition, i);
+						"Synchronization error - Attempting to find element using the expected condition: {} - Attempt #{}",
+								expectedCondition, i + 1);
 			}
 		}
+		logger.error("Unable to perform element synchronization after {} attempt(s)", getSynchronizationAttempts());
 		throw new ElementSynchronizationException(String.format("Unable to find element %s", by));
 	}
 	

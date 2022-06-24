@@ -37,7 +37,7 @@ public class Synchronize {
 	
 	public Alert synchronizeAlert() {
 		try {
-  		return ((ElementSynchronized) 
+  		return ((SynchronizationEngine) 
   				Class.forName(getConditionPackageName(SynchronizationMethods.ALERT_IS_PRESENT))
   					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).getAlert();
 		} catch(NotImplementedException e) {
@@ -49,7 +49,7 @@ public class Synchronize {
 	
 	public WebElement synchronizeWebElement(SynchronizationMethods synchronizationMethod, By by) {
 		try {
-  		return ((ElementSynchronized) 
+  		return ((SynchronizationEngine) 
   				Class.forName(getConditionPackageName(synchronizationMethod))
   					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).getWebElement(by);
 		} catch(NotImplementedException e) {
@@ -61,7 +61,7 @@ public class Synchronize {
 	
 	public List<WebElement> synchronizeWebElements(SynchronizationMethods synchronizationMethod, By by) {
 		try {
-  		return ((ElementSynchronized) 
+  		return ((SynchronizationEngine) 
   				Class.forName(getConditionPackageName(synchronizationMethod))
   					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).getWebElements(by);
 		} catch(NotImplementedException e) {

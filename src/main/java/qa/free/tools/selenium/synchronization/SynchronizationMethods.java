@@ -23,7 +23,8 @@ import lombok.Getter;
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
 public enum SynchronizationMethods {
-	ALERT_IS_PRESENT("AlertIsPresent")
+	ALERT_IS_PRESENT("AlertIsPresent"),
+	ELEMENT_TO_BE_CLICKABLE("ElementToBeClickable")
 	;
 	
 	@Getter

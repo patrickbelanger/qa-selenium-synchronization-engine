@@ -21,9 +21,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
@@ -31,38 +31,38 @@ import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class AlertIsDisplayedTest {
+class ElementToBeClickableTest {
 
 	private WebDriver webDriver;
-	private AlertIsPresent underTest;
+	private ElementToBeClickable underTest;
 	
 	@BeforeEach
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
 		webDriver = new ChromeDriver();
-		underTest = new AlertIsPresent(webDriver);
+		underTest = new ElementToBeClickable(webDriver);
 	}
 	
 	@Test
-	void alertIsPresent_ableToSynchronizeAnAlertDialogAndInteractWithIt() {
-		webDriver.get("https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_alert");
+	void elementToBeClickable_ableToSynchronizeAWebElementAndClickAButton() {
+		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
 		webDriver.switchTo().frame("iframeResult");
-		webDriver.findElement(By.tagName("button")).click();
-		Assertions.assertNotNull(underTest.getAlert());
-		Assertions.assertInstanceOf(Alert.class, underTest.getAlert());
-		Assertions.assertEquals("Hello! I am an alert box!", underTest.getAlert().getText());
-		underTest.getAlert().dismiss();
+		WebElement webElement = underTest.getWebElement(By.tagName("button"));
+		Assertions.assertNotNull(webElement);
+		Assertions.assertInstanceOf(WebElement.class, webElement);
+		webElement.click();
 	}
 
 	@Test
-	void alertIsPresent_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementMethod() {
+	void elementToBeClickable_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
-			underTest.getWebElement(null);
-		});	
+			underTest.getAlert();
+		});
+		
 	}
 	
 	@Test
-	void alertIsPresent_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
+	void elementToBeClickable_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebElements(null);
 		});
@@ -73,5 +73,4 @@ class AlertIsDisplayedTest {
 		webDriver.quit();
 		underTest = null;
 	}
-	
 }
