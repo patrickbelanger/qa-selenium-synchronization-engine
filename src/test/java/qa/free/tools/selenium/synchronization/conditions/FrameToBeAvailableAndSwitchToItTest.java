@@ -31,44 +31,44 @@ import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class ElementToBeClickableTest {
+class FrameToBeAvailableAndSwitchToItTest {
 
 	private WebDriver webDriver;
-	private ElementToBeClickable underTest;
+	private FrameToBeAvailableAndSwitchToIt underTest;
 	
 	@BeforeEach
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
 		webDriver = new ChromeDriver();
-		underTest = new ElementToBeClickable(webDriver);
+		underTest = new FrameToBeAvailableAndSwitchToIt(webDriver);
 	}
 	
 	@Test
-	void elementToBeClickable_ableToSynchronizeAWebElementAndClickAButton() {
+	void presenceOfElementLocated_ableToSynchronizeAWebElementAndElementIsVisible() {
 		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
-		webDriver.switchTo().frame("iframeResult");
-		WebElement webElement = underTest.getWebElement(By.tagName("button"));
+		webDriver = underTest.getWebDriverInstance("iframeResult");
+		WebElement webElement = webDriver.findElement(By.tagName("button"));
 		Assertions.assertNotNull(webElement);
 		Assertions.assertInstanceOf(WebElement.class, webElement);
-		webElement.click();
+		Assertions.assertTrue(webElement.isDisplayed());
 	}
 
 	@Test
-	void elementToBeClickable_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
+	void presenceOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getAlert();
-		});		
+		});
 	}
 	
 	@Test
-	void elementToBeClickable_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
+	void presenceOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebDriverInstance(null);
 		});	
 	}
 	
 	@Test
-	void elementToBeClickable_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
+	void presenceOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebElements(null);
 		});

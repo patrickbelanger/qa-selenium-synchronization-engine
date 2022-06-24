@@ -57,8 +57,7 @@ class PresenceOfElementLocatedTest {
 	void presenceOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getAlert();
-		});
-		
+		});	
 	}
 	
 	@Test
