@@ -43,8 +43,13 @@ public class PresenceOfElementLocated extends SynchronizationEngine {
 	}
 
 	@Override
+	public WebDriver getWebDriverInstance(Object object) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	@Override
 	public WebElement getWebElement(By by) {
-		return (WebElement) performSynchronization(by, ExpectedConditions.presenceOfElementLocated(by));
+		return performSynchronization(by, ExpectedConditions.presenceOfElementLocated(by));
 	}
 
 	@Override

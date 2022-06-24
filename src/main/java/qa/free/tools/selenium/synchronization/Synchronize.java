@@ -47,6 +47,18 @@ public class Synchronize {
 		}
 	}
 	
+	public WebDriver synchronizeWebDriverInstance(SynchronizationMethods synchronizationMethod, Object object) {
+		try {
+  		return ((SynchronizationEngine) 
+  				Class.forName(getConditionPackageName(synchronizationMethod))
+  					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).getWebDriverInstance(object);
+		} catch(NotImplementedException e) {
+			throw new NotImplementedException(e);
+		} catch(Exception e) {
+			throw new ElementSynchronizationException(e);
+		}
+	}
+	
 	public WebElement synchronizeWebElement(SynchronizationMethods synchronizationMethod, By by) {
 		try {
   		return ((SynchronizationEngine) 

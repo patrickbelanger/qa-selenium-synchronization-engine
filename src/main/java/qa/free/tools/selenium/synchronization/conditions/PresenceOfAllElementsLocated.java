@@ -31,15 +31,15 @@ import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class AlertIsPresent extends SynchronizationEngine {
-	
-	public AlertIsPresent(WebDriver webDriver) {
+public class PresenceOfAllElementsLocated extends SynchronizationEngine {
+
+	public PresenceOfAllElementsLocated(WebDriver webDriver) {
 		super(webDriver);
 	}
 
 	@Override
 	public Alert getAlert() {
-		return performSynchronization(null, ExpectedConditions.alertIsPresent());
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 
 	@Override
@@ -54,12 +54,12 @@ public class AlertIsPresent extends SynchronizationEngine {
 
 	@Override
 	public List<WebElement> getWebElements(By by) {
-		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+		return performSynchronization(by, ExpectedConditions.presenceOfAllElementsLocatedBy(by));
 	}
 
 	@Override
 	public boolean isConditionMet(Object object) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
-
+	
 }

@@ -57,8 +57,14 @@ class PresenceOfElementLocatedTest {
 	void presenceOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getAlert();
-		});
-		
+		});	
+	}
+	
+	@Test
+	void presenceOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
+		Assertions.assertThrows(NotImplementedException.class, () -> {
+			underTest.getWebDriverInstance(null);
+		});	
 	}
 	
 	@Test

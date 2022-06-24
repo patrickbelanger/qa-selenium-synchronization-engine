@@ -43,8 +43,13 @@ public class ElementToBeClickable extends SynchronizationEngine {
 	}
 
 	@Override
+	public WebDriver getWebDriverInstance(Object object) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	@Override
 	public WebElement getWebElement(By by) {
-		return (WebElement) performSynchronization(by, ExpectedConditions.elementToBeClickable(by));
+		return performSynchronization(by, ExpectedConditions.elementToBeClickable(by));
 	}
 
 	@Override

@@ -25,7 +25,9 @@ import lombok.Getter;
 public enum SynchronizationMethods {
 	ALERT_IS_PRESENT("AlertIsPresent"),
 	ELEMENT_TO_BE_CLICKABLE("ElementToBeClickable"),
-	PRESENCE_OF_ELEMENT_LOCATED("PresenceOfElementLocated")
+	FRAME_TO_BE_AVAILABLE_AND_SWITCH_TO_IT("FrameToBeAvailableAndSwitchToIt"),
+	PRESENCE_OF_ELEMENT_LOCATED("PresenceOfElementLocated"),
+	PRESENCE_OF_ALL_ELEMENTS_LOCATED("PresenceOfAllElementsLocated")
 	;
 	
 	@Getter

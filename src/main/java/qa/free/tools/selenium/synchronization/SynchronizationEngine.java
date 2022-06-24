@@ -120,6 +120,7 @@ public abstract class SynchronizationEngine {
 	}
 	
 	public abstract Alert getAlert();
+	public abstract WebDriver getWebDriverInstance(Object object);
 	public abstract WebElement getWebElement(By by);
 	public abstract List<WebElement> getWebElements(By by);
 	public abstract boolean isConditionMet(Object object);
