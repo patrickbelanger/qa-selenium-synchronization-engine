@@ -55,6 +55,13 @@ class AlertIsDisplayedTest {
 	}
 
 	@Test
+	void alertIsPresent_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
+		Assertions.assertThrows(NotImplementedException.class, () -> {
+			underTest.getWebDriverInstance(null);
+		});	
+	}
+	
+	@Test
 	void alertIsPresent_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebElement(null);

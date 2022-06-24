@@ -62,6 +62,13 @@ class ElementToBeClickableTest {
 	}
 	
 	@Test
+	void elementToBeClickable_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
+		Assertions.assertThrows(NotImplementedException.class, () -> {
+			underTest.getWebDriverInstance(null);
+		});	
+	}
+	
+	@Test
 	void elementToBeClickable_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebElements(null);

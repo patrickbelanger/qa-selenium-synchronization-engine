@@ -26,25 +26,39 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import qa.free.tools.selenium.synchronization.SynchronizationEngine;
+import qa.free.tools.selenium.synchronization.converter.Converter;
 import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
 
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class AlertIsPresent extends SynchronizationEngine {
-	
-	public AlertIsPresent(WebDriver webDriver) {
+public class FrameToBeAvailableAndSwitchToIt extends SynchronizationEngine {
+
+	public FrameToBeAvailableAndSwitchToIt(WebDriver webDriver) {
 		super(webDriver);
 	}
 
 	@Override
 	public Alert getAlert() {
-		return performSynchronization(null, ExpectedConditions.alertIsPresent());
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 
 	@Override
 	public WebDriver getWebDriverInstance(Object object) {
-		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+		if (object instanceof By) {
+			return performSynchronization(null, 
+					ExpectedConditions.frameToBeAvailableAndSwitchToIt(new Converter<Object>(object).convertAsBy()));			
+		}
+		else if (object instanceof Integer) {
+			return performSynchronization(null, 
+					ExpectedConditions.frameToBeAvailableAndSwitchToIt(new Converter<Object>(object).convertAsInteger()));			
+		}
+		else if (object instanceof String) {
+			return performSynchronization(null, 
+					ExpectedConditions.frameToBeAvailableAndSwitchToIt(new Converter<Object>(object).convertAsString()));			
+		}
+		return performSynchronization(null, 
+				ExpectedConditions.frameToBeAvailableAndSwitchToIt(new Converter<Object>(object).convertAsWebElement()));
 	}
 	
 	@Override
@@ -61,5 +75,5 @@ public class AlertIsPresent extends SynchronizationEngine {
 	public boolean isConditionMet(Object object) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
-
+	
 }
