@@ -39,7 +39,7 @@ public class AlertIsPresent extends SynchronizationEngine {
 
 	@Override
 	public Alert getAlert() {
-		return (Alert) performSynchronization(null, ExpectedConditions.alertIsPresent());
+		return performSynchronization(null, ExpectedConditions.alertIsPresent());
 	}
 
 	@Override

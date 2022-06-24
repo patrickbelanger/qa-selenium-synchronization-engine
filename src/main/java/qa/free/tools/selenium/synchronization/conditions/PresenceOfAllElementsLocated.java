@@ -31,9 +31,9 @@ import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class PresenceOfElementLocated extends SynchronizationEngine {
+public class PresenceOfAllElementsLocated extends SynchronizationEngine {
 
-	public PresenceOfElementLocated(WebDriver webDriver) {
+	public PresenceOfAllElementsLocated(WebDriver webDriver) {
 		super(webDriver);
 	}
 
@@ -44,12 +44,12 @@ public class PresenceOfElementLocated extends SynchronizationEngine {
 
 	@Override
 	public WebElement getWebElement(By by) {
-		return performSynchronization(by, ExpectedConditions.presenceOfElementLocated(by));
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 
 	@Override
 	public List<WebElement> getWebElements(By by) {
-		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+		return performSynchronization(by, ExpectedConditions.presenceOfAllElementsLocatedBy(by));
 	}
 
 	@Override

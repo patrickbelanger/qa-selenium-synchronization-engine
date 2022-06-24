@@ -44,7 +44,7 @@ public class ElementToBeClickable extends SynchronizationEngine {
 
 	@Override
 	public WebElement getWebElement(By by) {
-		return (WebElement) performSynchronization(by, ExpectedConditions.elementToBeClickable(by));
+		return performSynchronization(by, ExpectedConditions.elementToBeClickable(by));
 	}
 
 	@Override
