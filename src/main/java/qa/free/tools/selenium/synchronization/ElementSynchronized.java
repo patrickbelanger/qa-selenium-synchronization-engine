@@ -1,0 +1,111 @@
+// Licensed to the Software Freedom Conservancy (SFC) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The SFC licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+package qa.free.tools.selenium.synchronization;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.function.Function;
+
+import org.aeonbits.owner.ConfigFactory;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import lombok.AccessLevel;
+import lombok.Getter;
+import qa.free.tools.selenium.synchronization.exceptions.ElementSynchronizationException;
+import qa.free.tools.selenium.synchronization.properties.SynchronizationProperties;
+
+/**
+ * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
+ */
+public abstract class ElementSynchronized {
+	
+	ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
+	ThreadLocal<WebDriverWait> wait = new ThreadLocal<>();
+	ThreadLocal<Integer> synchronizationAttempts = new ThreadLocal<>();
+	
+	private static final String EXCEPTION = "Not implemented for %s";
+	
+	@Getter(AccessLevel.PRIVATE)
+	static final Logger logger = LoggerFactory.getLogger(ElementSynchronized.class);
+	
+	@Getter(AccessLevel.PRIVATE)
+	static final SynchronizationProperties synchronizationProperties = 
+		ConfigFactory.create(SynchronizationProperties.class);
+	
+	public int getSynchronizationAttempts() {
+		return synchronizationAttempts.get();
+	}
+
+	public void setSynchronizationAttempts(int synchronizationAttempts) {
+		this.synchronizationAttempts.set(synchronizationAttempts);
+	}
+	
+	public ElementSynchronized(WebDriver webDriver) {
+		setWebDriver(webDriver);
+		setWait(new WebDriverWait(getWebDriver(), Duration.ofSeconds(synchronizationProperties.getTimeout())));
+	}
+	
+	protected String getExceptionDetails(Class<?> clazz) {
+		return String.format(EXCEPTION, clazz.toString());
+	}
+	
+	protected WebDriver getWebDriver() {
+		return webDriver.get();
+	}
+
+	protected WebDriverWait getWait() {
+		return wait.get();
+	}
+
+	private void setWebDriver(WebDriver webDriver) {
+		this.webDriver.set(webDriver);
+	}
+
+	private void setWait(WebDriverWait wait) {
+		this.wait.set(wait);
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected <V, T> V performSynchronization(By by, ExpectedCondition<T> expectedCondition) {
+		for (int i = 0; i < synchronizationProperties.getMaximumRetryAttempts(); i++) {
+			try {
+				return (V) getWait().until((Function<? super WebDriver, Object>) expectedCondition);
+			} catch(TimeoutException e) {
+				setSynchronizationAttempts(i + 1);
+				logger.info(
+						String.format("Element synchronization error - Attempting to find the element using the expected condition: %s - Attempt #%s",
+								expectedCondition.toString(), i));
+			}
+		}
+		throw new ElementSynchronizationException(String.format("Unable to find element %s", by));
+	}
+	
+	public abstract Alert getAlert();
+	public abstract WebElement getWebElement(By by);
+	public abstract List<WebElement> getWebElements(By by);
+	public abstract boolean isConditionMet(Object object);
+	
+}
