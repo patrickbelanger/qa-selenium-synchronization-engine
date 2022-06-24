@@ -44,7 +44,27 @@ class FrameToBeAvailableAndSwitchToItTest {
 	}
 	
 	@Test
-	void presenceOfElementLocated_ableToSynchronizeAWebElementAndElementIsVisible() {
+	void frameToBeAvailableAndSwitchToIt_ableToSynchronizeAndSwitchFrameUsingBy() {
+		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		webDriver = underTest.getWebDriverInstance(By.id("iframeResult"));
+		WebElement webElement = webDriver.findElement(By.tagName("button"));
+		Assertions.assertNotNull(webElement);
+		Assertions.assertInstanceOf(WebElement.class, webElement);
+		Assertions.assertTrue(webElement.isDisplayed());
+	}
+	
+	@Test
+	void frameToBeAvailableAndSwitchToIt_ableToSynchronizeAndSwitchFrameUsingInteger() {
+		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		webDriver = underTest.getWebDriverInstance(1);
+		WebElement webElement = new ElementToBeClickable(webDriver).getWebElement(By.tagName("button"));
+		Assertions.assertNotNull(webElement);
+		Assertions.assertInstanceOf(WebElement.class, webElement);
+		Assertions.assertTrue(webElement.isDisplayed());
+	}
+	
+	@Test
+	void frameToBeAvailableAndSwitchToIt_ableToSynchronizeAndSwitchFrameUsingString() {
 		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
 		webDriver = underTest.getWebDriverInstance("iframeResult");
 		WebElement webElement = webDriver.findElement(By.tagName("button"));
@@ -54,21 +74,32 @@ class FrameToBeAvailableAndSwitchToItTest {
 	}
 
 	@Test
-	void presenceOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
+	void frameToBeAvailableAndSwitchToIt_ableToSynchronizeAndSwitchFrameUsingWebElement() {
+		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		WebElement webElement = webDriver.findElement(By.id("iframeResult"));
+		webDriver = underTest.getWebDriverInstance(webElement);
+		webElement = webDriver.findElement(By.tagName("button"));
+		Assertions.assertNotNull(webElement);
+		Assertions.assertInstanceOf(WebElement.class, webElement);
+		Assertions.assertTrue(webElement.isDisplayed());
+	}
+	
+	@Test
+	void frameToBeAvailableAndSwitchToIt_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getAlert();
 		});
 	}
 	
 	@Test
-	void presenceOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
+	void frameToBeAvailableAndSwitchToIt_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
-			underTest.getWebDriverInstance(null);
-		});	
+			underTest.getWebElement(null);
+		});
 	}
 	
 	@Test
-	void presenceOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
+	void frameToBeAvailableAndSwitchToIt_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebElements(null);
 		});

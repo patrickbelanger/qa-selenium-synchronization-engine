@@ -87,6 +87,18 @@ class SynchronizeTest {
 	}
 	
 	@Test
+	void synchronizeWebElement_ableToSwitchFrame() {
+		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		underTest.synchronizeWebDriverInstance(SynchronizationMethods.FRAME_TO_BE_AVAILABLE_AND_SWITCH_TO_IT, 
+				"iframeResult");
+		WebElement webElement = underTest
+				.synchronizeWebElement(SynchronizationMethods.ELEMENT_TO_BE_CLICKABLE, By.tagName("button"));
+		Assertions.assertNotNull(webElement);
+		Assertions.assertInstanceOf(WebElement.class, webElement);
+		webElement.click();
+	}
+	
+	@Test
 	void synchronizeWebElement_unableToSynchronizeAWebElementBecauseTheButtonIsDisabled() {
 		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
 		webDriver.switchTo().frame("iframeResult");
