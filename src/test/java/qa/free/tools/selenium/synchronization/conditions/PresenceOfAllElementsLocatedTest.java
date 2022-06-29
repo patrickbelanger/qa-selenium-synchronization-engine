@@ -63,6 +63,20 @@ class PresenceOfAllElementsLocatedTest {
 	}
 	
 	@Test
+	void presenceOfAllElementsLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
+		Assertions.assertThrows(NotImplementedException.class, () -> {
+			underTest.getNestedWebElement(null, null);
+		});
+	}
+	
+	@Test
+	void presenceOfAllElementsLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
+		Assertions.assertThrows(NotImplementedException.class, () -> {
+			underTest.getNestedWebElements(null, null);
+		});
+	}	
+	
+	@Test
 	void presenceOfAllElementsLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebDriverInstance(null);

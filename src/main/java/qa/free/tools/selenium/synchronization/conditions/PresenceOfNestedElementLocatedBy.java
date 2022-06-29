@@ -26,15 +26,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import qa.free.tools.selenium.synchronization.SynchronizationEngine;
-import qa.free.tools.selenium.synchronization.converter.Converter;
 import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
 
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class FrameToBeAvailableAndSwitchToIt extends SynchronizationEngine {
+public class PresenceOfNestedElementLocatedBy extends SynchronizationEngine {
 
-	public FrameToBeAvailableAndSwitchToIt(WebDriver webDriver) {
+	public PresenceOfNestedElementLocatedBy(WebDriver webDriver) {
 		super(webDriver);
 	}
 
@@ -44,30 +43,17 @@ public class FrameToBeAvailableAndSwitchToIt extends SynchronizationEngine {
 	}
 
 	@Override
-	public WebDriver getWebDriverInstance(Object object) {
-		if (object instanceof By) {
-			return performSynchronization(null, 
-					ExpectedConditions.frameToBeAvailableAndSwitchToIt(new Converter<Object>(object).convertAsBy()));			
-		}
-		else if (object instanceof Integer) {
-			return performSynchronization(null, 
-					ExpectedConditions.frameToBeAvailableAndSwitchToIt(new Converter<Object>(object).convertAsInteger()));			
-		}
-		else if (object instanceof String) {
-			return performSynchronization(null, 
-					ExpectedConditions.frameToBeAvailableAndSwitchToIt(new Converter<Object>(object).convertAsString()));			
-		}
-		return performSynchronization(null, 
-				ExpectedConditions.frameToBeAvailableAndSwitchToIt(new Converter<Object>(object).convertAsWebElement()));
-	}
-	
-	@Override
 	public WebElement getNestedWebElement(By locator, By childLocator) {
-		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+		return performSynchronization(locator, ExpectedConditions.presenceOfNestedElementLocatedBy(locator, childLocator));
 	}
 
 	@Override
 	public List<WebElement> getNestedWebElements(By locator, By childLocator) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	@Override
+	public WebDriver getWebDriverInstance(Object object) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	

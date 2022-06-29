@@ -47,7 +47,7 @@ class SynchronizeTest {
 	}
 	
 	@Test
-	void synchronizeAlert_ableToSynchronizeAnAlertDialogAndInteractWithIt() {
+	void synchronizeAlert_ableToSynchronizeAnAlertDialogAndInteractWithIt() throws ElementSynchronizationException {
 		webDriver.get("https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_alert");
 		webDriver.switchTo().frame("iframeResult");
 		webDriver.findElement(By.tagName("button")).click();

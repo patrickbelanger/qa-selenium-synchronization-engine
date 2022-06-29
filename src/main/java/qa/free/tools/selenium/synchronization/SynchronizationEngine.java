@@ -120,6 +120,8 @@ public abstract class SynchronizationEngine {
 	}
 	
 	public abstract Alert getAlert();
+	public abstract WebElement getNestedWebElement(By locator, By childLocator);
+	public abstract List<WebElement> getNestedWebElements(By locator, By childLocator);
 	public abstract WebDriver getWebDriverInstance(Object object);
 	public abstract WebElement getWebElement(By by);
 	public abstract List<WebElement> getWebElements(By by);

@@ -43,6 +43,16 @@ public class PresenceOfAllElementsLocated extends SynchronizationEngine {
 	}
 
 	@Override
+	public WebElement getNestedWebElement(By locator, By childLocator) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+
+	@Override
+	public List<WebElement> getNestedWebElements(By locator, By childLocator) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	@Override
 	public WebDriver getWebDriverInstance(Object object) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}

@@ -92,6 +92,20 @@ class FrameToBeAvailableAndSwitchToItTest {
 	}
 	
 	@Test
+	void frameToBeAvailableAndSwitchToIt_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
+		Assertions.assertThrows(NotImplementedException.class, () -> {
+			underTest.getNestedWebElement(null, null);
+		});
+	}
+	
+	@Test
+	void frameToBeAvailableAndSwitchToIt_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
+		Assertions.assertThrows(NotImplementedException.class, () -> {
+			underTest.getNestedWebElements(null, null);
+		});
+	}	
+	
+	@Test
 	void frameToBeAvailableAndSwitchToIt_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebElement(null);
