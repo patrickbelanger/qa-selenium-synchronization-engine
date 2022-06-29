@@ -56,7 +56,7 @@ class FrameToBeAvailableAndSwitchToItTest {
 	@Test
 	void frameToBeAvailableAndSwitchToIt_ableToSynchronizeAndSwitchFrameUsingInteger() {
 		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
-		webDriver = underTest.getWebDriverInstance(1);
+		webDriver = underTest.getWebDriverInstance(0);
 		WebElement webElement = new ElementToBeClickable(webDriver).getWebElement(By.tagName("button"));
 		Assertions.assertNotNull(webElement);
 		Assertions.assertInstanceOf(WebElement.class, webElement);

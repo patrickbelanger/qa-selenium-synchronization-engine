@@ -17,6 +17,8 @@
 
 package qa.free.tools.selenium.synchronization.conditions;
 
+import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,59 +33,60 @@ import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class PresenceOfNestedElementLocatedByTest {
+class PresenceOfNestedElementsLocatedByTest {
 
 	private WebDriver webDriver;
-	private PresenceOfNestedElementLocatedBy underTest;
+	private PresenceOfNestedElementsLocatedBy underTest;
 	
 	@BeforeEach
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
 		webDriver = new ChromeDriver();
-		underTest = new PresenceOfNestedElementLocatedBy(webDriver);
+		underTest = new PresenceOfNestedElementsLocatedBy(webDriver);
 	}
 	
 	@Test
-	void presenceOfNestedElementLocatedBy_ableToSynchronizeAChildWebElementAndElementIsVisible() {
+	void presenceOfNestedElementsLocatedBy_ableToSynchronizeAChildWebElementsAndElementIsVisible() {
 		webDriver.get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
 		webDriver.switchTo().frame("iframeResult");
-		WebElement webElement = underTest.getNestedWebElement(By.xpath("//table"), By.xpath("//tr/td"));
-		Assertions.assertNotNull(webElement);
-		Assertions.assertInstanceOf(WebElement.class, webElement);
-		Assertions.assertTrue(webElement.isDisplayed());
-		Assertions.assertTrue(webElement.getText().contains("Alfreds Futterkiste"));
+		List<WebElement> webElements = underTest.getNestedWebElements(By.xpath("//table"), By.xpath("//tr/td"));
+		Assertions.assertNotNull(webElements);
+		Assertions.assertInstanceOf(List.class, webElements);
+		Assertions.assertTrue(webElements.size() > 1);
+		Assertions.assertTrue(webElements.get(0).isDisplayed());
+		Assertions.assertTrue(webElements.get(0).getText().contains("Alfreds Futterkiste"));
 	}
 
 	@Test
-	void presenceOfNestedElementLocatedBy_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
+	void presenceOfNestedElementsLocatedBy_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
-			underTest.getNestedWebElements(null, null);
+			underTest.getNestedWebElement(null, null);
 		});
 	}
 	
 	@Test
-	void presenceOfNestedElementLocatedBy_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
+	void presenceOfNestedElementsLocatedBy_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getAlert();
 		});	
 	}
 
 	@Test
-	void presenceOfNestedElementLocatedBy_anExceptionIsRaisedWhenAttemptingCallingSynchronizWebElementMethod() {
+	void presenceOfNestedElementsLocatedBy_anExceptionIsRaisedWhenAttemptingCallingSynchronizWebElementMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebElement(null);
 		});
 	}
 	
 	@Test
-	void presenceOfNestedElementLocatedBy_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
+	void presenceOfNestedElementsLocatedBy_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebDriverInstance(null);
 		});	
 	}
 	
 	@Test
-	void presenceOfNestedElementLocatedBy_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
+	void presenceOfNestedElementsLocatedBy_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebElements(null);
 		});

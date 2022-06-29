@@ -17,16 +17,12 @@
 
 package qa.free.tools.selenium.synchronization.conditions;
 
-import java.util.List;
-
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import qa.free.tools.selenium.synchronization.SynchronizationEngine;
-import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
 
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
@@ -36,40 +32,10 @@ public class PresenceOfElementLocated extends SynchronizationEngine {
 	public PresenceOfElementLocated(WebDriver webDriver) {
 		super(webDriver);
 	}
-
-	@Override
-	public Alert getAlert() {
-		throw new NotImplementedException(getExceptionDetails(this.getClass()));
-	}
-
-	@Override
-	public WebElement getNestedWebElement(By locator, By childLocator) {
-		throw new NotImplementedException(getExceptionDetails(this.getClass()));
-	}
-
-	@Override
-	public List<WebElement> getNestedWebElements(By locator, By childLocator) {
-		throw new NotImplementedException(getExceptionDetails(this.getClass()));
-	}
-	
-	@Override
-	public WebDriver getWebDriverInstance(Object object) {
-		throw new NotImplementedException(getExceptionDetails(this.getClass()));
-	}
 	
 	@Override
 	public WebElement getWebElement(By by) {
 		return performSynchronization(by, ExpectedConditions.presenceOfElementLocated(by));
-	}
-
-	@Override
-	public List<WebElement> getWebElements(By by) {
-		throw new NotImplementedException(getExceptionDetails(this.getClass()));
-	}
-
-	@Override
-	public boolean isConditionMet(Object object) {
-		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
 }

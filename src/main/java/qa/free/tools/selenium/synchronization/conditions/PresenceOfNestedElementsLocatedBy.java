@@ -17,6 +17,8 @@
 
 package qa.free.tools.selenium.synchronization.conditions;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,15 +29,15 @@ import qa.free.tools.selenium.synchronization.SynchronizationEngine;
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class PresenceOfNestedElementLocatedBy extends SynchronizationEngine {
+public class PresenceOfNestedElementsLocatedBy extends SynchronizationEngine {
 
-	public PresenceOfNestedElementLocatedBy(WebDriver webDriver) {
+	public PresenceOfNestedElementsLocatedBy(WebDriver webDriver) {
 		super(webDriver);
 	}
-	
+
 	@Override
-	public WebElement getNestedWebElement(By locator, By childLocator) {
-		return performSynchronization(locator, ExpectedConditions.presenceOfNestedElementLocatedBy(locator, childLocator));
+	public List<WebElement> getNestedWebElements(By locator, By childLocator) {
+		return performSynchronization(locator, ExpectedConditions.presenceOfNestedElementsLocatedBy(locator, childLocator));
 	}
 	
 }
