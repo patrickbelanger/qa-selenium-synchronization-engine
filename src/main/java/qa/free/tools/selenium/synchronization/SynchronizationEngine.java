@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 import lombok.AccessLevel;
 import lombok.Getter;
 import qa.free.tools.selenium.synchronization.exceptions.ElementSynchronizationException;
+import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
 import qa.free.tools.selenium.synchronization.properties.SynchronizationProperties;
 
 /**
@@ -119,10 +120,32 @@ public abstract class SynchronizationEngine {
 		}
 	}
 	
-	public abstract Alert getAlert();
-	public abstract WebDriver getWebDriverInstance(Object object);
-	public abstract WebElement getWebElement(By by);
-	public abstract List<WebElement> getWebElements(By by);
-	public abstract boolean isConditionMet(Object object);
+	public Alert getAlert() {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	public WebElement getNestedWebElement(By locator, By childLocator) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	public List<WebElement> getNestedWebElements(By locator, By childLocator) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	public WebDriver getWebDriverInstance(Object object) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	public WebElement getWebElement(By by) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	public List<WebElement> getWebElements(By by) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	public boolean isConditionMet(Object object) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
 	
 }

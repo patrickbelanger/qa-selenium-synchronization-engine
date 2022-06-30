@@ -47,7 +47,7 @@ class SynchronizeTest {
 	}
 	
 	@Test
-	void synchronizeAlert_ableToSynchronizeAnAlertDialogAndInteractWithIt() {
+	void synchronizeAlert_ableToSynchronizeAnAlertDialogAndInteractWithIt() throws ElementSynchronizationException {
 		webDriver.get("https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_alert");
 		webDriver.switchTo().frame("iframeResult");
 		webDriver.findElement(By.tagName("button")).click();
@@ -62,6 +62,29 @@ class SynchronizeTest {
 		Assertions.assertThrows(ElementSynchronizationException.class, () -> {
 			underTest.synchronizeAlert();
 		});
+	}
+	
+	@Test
+	void synchronizeWebElement_ableToSynchronizeANestedWebElement() {
+		webDriver.get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
+		webDriver.switchTo().frame("iframeResult");
+		WebElement webElement = underTest.synchronizeNestedWebElement(By.xpath("//table"), By.xpath("//tr/td"));
+		Assertions.assertNotNull(webElement);
+		Assertions.assertInstanceOf(WebElement.class, webElement);
+		Assertions.assertTrue(webElement.isDisplayed());
+		Assertions.assertTrue(webElement.getText().contains("Alfreds Futterkiste"));
+	}
+	
+	@Test
+	void synchronizeWebElement_ableToSynchronizeANestedWebElements() {
+		webDriver.get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
+		webDriver.switchTo().frame("iframeResult");
+		List<WebElement> webElements = underTest.synchronizeNestedWebElements(By.xpath("//table"), By.xpath("//tr/td"));
+		Assertions.assertNotNull(webElements);
+		Assertions.assertInstanceOf(List.class, webElements);
+		Assertions.assertTrue(webElements.size() > 1);
+		Assertions.assertTrue(webElements.get(0).isDisplayed());
+		Assertions.assertTrue(webElements.get(0).getText().contains("Alfreds Futterkiste"));
 	}
 	
 	@Test
