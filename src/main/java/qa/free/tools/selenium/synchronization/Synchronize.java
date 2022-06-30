@@ -59,11 +59,12 @@ public class Synchronize {
 		}
 	}
 	
-	public WebElement synchronizeWebElement(SynchronizationMethods synchronizationMethod, By by) {
+	public WebElement synchronizeNestedWebElement(By locator, By childLocator) {
 		try {
   		return ((SynchronizationEngine) 
-  				Class.forName(getConditionPackageName(synchronizationMethod))
-  					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).getWebElement(by);
+  				Class.forName(getConditionPackageName(SynchronizationMethods.PRESENCE_OF_NESTED_ELEMENT_LOCATED_BY))
+  					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver))
+  						.getNestedWebElement(locator, childLocator);
 		} catch(NotImplementedException e) {
 			throw new NotImplementedException(e);
 		} catch(Exception e) {
@@ -71,11 +72,36 @@ public class Synchronize {
 		}
 	}
 	
-	public List<WebElement> synchronizeWebElements(SynchronizationMethods synchronizationMethod, By by) {
+	public List<WebElement> synchronizeNestedWebElements(By locator, By childLocator) {
+		try {
+  		return ((SynchronizationEngine) 
+  				Class.forName(getConditionPackageName(SynchronizationMethods.PRESENCE_OF_NESTED_ELEMENTS_LOCATED_BY))
+  					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver))
+  						.getNestedWebElements(locator, childLocator);
+		} catch(NotImplementedException e) {
+			throw new NotImplementedException(e);
+		} catch(Exception e) {
+			throw new ElementSynchronizationException(e);
+		}
+	}
+	
+	public WebElement synchronizeWebElement(SynchronizationMethods synchronizationMethod, By locator) {
 		try {
   		return ((SynchronizationEngine) 
   				Class.forName(getConditionPackageName(synchronizationMethod))
-  					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).getWebElements(by);
+  					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).getWebElement(locator);
+		} catch(NotImplementedException e) {
+			throw new NotImplementedException(e);
+		} catch(Exception e) {
+			throw new ElementSynchronizationException(e);
+		}
+	}
+	
+	public List<WebElement> synchronizeWebElements(SynchronizationMethods synchronizationMethod, By locator) {
+		try {
+  		return ((SynchronizationEngine) 
+  				Class.forName(getConditionPackageName(synchronizationMethod))
+  					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).getWebElements(locator);
 		} catch(NotImplementedException e) {
 			throw new NotImplementedException(e);
 		} catch(Exception e) {
