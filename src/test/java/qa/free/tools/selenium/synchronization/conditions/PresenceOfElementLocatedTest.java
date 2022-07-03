@@ -44,7 +44,7 @@ class PresenceOfElementLocatedTest {
 	}
 	
 	@Test
-	void presenceOfElementLocated_ableToSynchronizeAWebElementAndElementIsVisible() {
+	void presenceOfElementLocated_ableToSynchronizeAWebElementAndElementIsPresent() {
 		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
 		webDriver.switchTo().frame("iframeResult");
 		WebElement webElement = underTest.getWebElement(By.tagName("button"));
