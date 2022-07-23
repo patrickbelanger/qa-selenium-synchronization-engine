@@ -8,7 +8,7 @@ public class Converter<T> {
 	 private T t;
 	
 	 public Converter(final T t) {
-		 this.t =t;
+		 this.t = t;
 	 }
 	 
 	 public By convertAsBy() {

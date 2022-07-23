@@ -48,7 +48,7 @@ public abstract class SynchronizationEngine {
 	ThreadLocal<Integer> synchronizationAttempts = new ThreadLocal<>();
 	
 	private static final String EXCEPTION = "Not implemented for %s";
-	private static final String SYNCHRONIZATION_PERFORMED_AGAINST = "Synchronization performed - Against: {}";
+	private static final String SYNCHRONIZATION_PERFORMED_AGAINST = "Synchronization performed - Against: {} - Conditions: {}";
 	
 	@Getter(AccessLevel.PRIVATE)
 	static final Logger logger = LoggerFactory.getLogger(SynchronizationEngine.class);
@@ -95,7 +95,7 @@ public abstract class SynchronizationEngine {
 		for (int i = 0; i < synchronizationProperties.getMaximumRetryAttempts(); i++) {
 			try {
 				V element = (V) getWait().until((Function<? super WebDriver, Object>) expectedCondition);
-				logSynchronizationElement(element);
+				logSynchronizationElement(element, expectedCondition);
 				return element;
 			} catch(TimeoutException e) {
 				setSynchronizationAttempts(i + 1);
@@ -108,15 +108,15 @@ public abstract class SynchronizationEngine {
 		throw new ElementSynchronizationException(String.format("Unable to find element %s", by));
 	}
 	
-	private void logSynchronizationElement(Object object) {
+	private <T> void logSynchronizationElement(Object object, ExpectedCondition<T> expectedCondition) {
 		if (object instanceof Alert) {
-			logger.info(SYNCHRONIZATION_PERFORMED_AGAINST, "Alert dialog");
+			logger.info(SYNCHRONIZATION_PERFORMED_AGAINST, "Alert dialog", expectedCondition);
 		} else if (object instanceof WebElement) {
-			logger.info(SYNCHRONIZATION_PERFORMED_AGAINST, "WebElement");
+			logger.info(SYNCHRONIZATION_PERFORMED_AGAINST, "WebElement", expectedCondition);
 		} else if (object instanceof List<?>) {
-			logger.info(SYNCHRONIZATION_PERFORMED_AGAINST, "List of WebElements");
+			logger.info(SYNCHRONIZATION_PERFORMED_AGAINST, "List of WebElements", expectedCondition);
 		} else {
-			logger.info(SYNCHRONIZATION_PERFORMED_AGAINST, "Condition");
+			logger.info(SYNCHRONIZATION_PERFORMED_AGAINST, "Condition", expectedCondition);
 		}
 	}
 	

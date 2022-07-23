@@ -46,7 +46,7 @@ class PresenceOfNestedElementsLocatedByTest {
 	}
 	
 	@Test
-	void presenceOfNestedElementsLocatedBy_ableToSynchronizeAChildWebElementsAndElementIsVisible() {
+	void presenceOfNestedElementsLocatedBy_ableToSynchronizeAChildWebElementsAndElementIsPresent() {
 		webDriver.get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
 		webDriver.switchTo().frame("iframeResult");
 		List<WebElement> webElements = underTest.getNestedWebElements(By.xpath("//table"), By.xpath("//tr/td"));

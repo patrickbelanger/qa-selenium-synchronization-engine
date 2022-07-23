@@ -15,31 +15,29 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package qa.free.tools.selenium.synchronization;
+package qa.free.tools.selenium.synchronization.conditions;
 
-import lombok.Getter;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import qa.free.tools.selenium.synchronization.SynchronizationEngine;
 
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public enum SynchronizationMethods {
-	ALERT_IS_PRESENT("AlertIsPresent"),
-	ELEMENT_TO_BE_CLICKABLE("ElementToBeClickable"),
-	FRAME_TO_BE_AVAILABLE_AND_SWITCH_TO_IT("FrameToBeAvailableAndSwitchToIt"),
-	INVISIBILITY_OF_ELEMENT_LOCATED("InvisibilityOfElementLocated"),
-	PRESENCE_OF_ELEMENT_LOCATED("PresenceOfElementLocated"),
-	PRESENCE_OF_ALL_ELEMENTS_LOCATED("PresenceOfAllElementsLocated"),
-	PRESENCE_OF_NESTED_ELEMENT_LOCATED_BY("PresenceOfNestedElementLocatedBy"),
-	PRESENCE_OF_NESTED_ELEMENTS_LOCATED_BY("PresenceOfNestedElementsLocatedBy"),
-	VISIBILITY_OF_ELEMENT_LOCATED("VisibilityOfElementLocated"),
-	VISIBILITY_OF_ALL_ELEMENTS_LOCATED_BY("VisibilityOfAllElementsLocatedBy")
-	;
+public class VisibilityOfAllElementsLocatedBy extends SynchronizationEngine {
+
+	public VisibilityOfAllElementsLocatedBy(WebDriver webDriver) {
+		super(webDriver);
+	}
 	
-	@Getter
-	private String className;
-	
-	private SynchronizationMethods(String className) {
-		this.className = className;
+	@Override
+	public List<WebElement> getWebElements(By by) {
+		return performSynchronization(by, ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
 	}
 	
 }
