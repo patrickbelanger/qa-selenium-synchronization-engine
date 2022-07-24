@@ -47,6 +47,21 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.1.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<packageName>qa.free.tools.selenium.synchronization</packageName>
+						</manifest>
+						<manifestEntries>
+							<Created-By>Patrick Belanger</Created-By>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M7</version>
 			</plugin>
@@ -129,4 +144,16 @@
 		</dependency>
 	</dependencies>
 
+	<name>qa-selenium-synchronization-engine</name>
+	<scm>
+		<url>https://github.com/patrickbelanger/qa-selenium-synchronization-engine</url>
+		<developerConnection>Patrick Bélanger</developerConnection>
+	</scm>
+	<organization>
+		<name>qa-free-tools</name>
+		<url>https://github.com/qa-free-tools</url>
+	</organization>
+	<issueManagement>
+		<url>https://github.com/patrickbelanger/qa-selenium-synchronization-engine/issues</url>
+	</issueManagement>
 </project>
