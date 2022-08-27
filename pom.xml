@@ -29,8 +29,10 @@
 		<logback.core.version>1.2.11</logback.core.version>
 		<lombok.version>1.18.22</lombok.version>
 		<owner.version>1.0.12</owner.version>
-		<selenium.version>4.2.1</selenium.version>
+		<selenium.version>4.4.0</selenium.version>
 		<slf4j.version>1.7.25</slf4j.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<build>
@@ -43,6 +45,21 @@
 					<source>11</source>
 					<target>11</target>
 					<release>11</release>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.1.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<packageName>qa.free.tools.selenium.synchronization</packageName>
+						</manifest>
+						<manifestEntries>
+							<Created-By>Patrick Belanger</Created-By>
+						</manifestEntries>
+					</archive>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -129,4 +146,16 @@
 		</dependency>
 	</dependencies>
 
+	<name>qa-selenium-synchronization-engine</name>
+	<scm>
+		<url>https://github.com/patrickbelanger/qa-selenium-synchronization-engine</url>
+		<developerConnection>Patrick Bélanger</developerConnection>
+	</scm>
+	<organization>
+		<name>qa-free-tools</name>
+		<url>https://github.com/qa-free-tools</url>
+	</organization>
+	<issueManagement>
+		<url>https://github.com/patrickbelanger/qa-selenium-synchronization-engine/issues</url>
+	</issueManagement>
 </project>
