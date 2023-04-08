@@ -15,36 +15,25 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package qa.free.tools.selenium.synchronization.converter;
+package qa.free.tools.selenium.synchronization.conditions;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import qa.free.tools.selenium.synchronization.SynchronizationEngine;
 
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class Converter<T> {
+public class TitleIs extends SynchronizationEngine {
 
-	 private T t;
+	public TitleIs(WebDriver webDriver) {
+		super(webDriver);
+	}
 	
-	 public Converter(final T t) {
-		 this.t = t;
-	 }
-	 
-	 public By convertAsBy() {
-		 return (By) this.t;
-	 }
-
-	 public int convertAsInteger() {
-		 return (int) this.t;
-	 }
-	 
-	 public String convertAsString() {
-		 return (String) this.t;
-	 }
-	 
-	 public WebElement convertAsWebElement() {
-		 return (WebElement) this.t;
-	 }
-	 
+	@Override
+	public boolean isConditionMet(Object object) {
+		return performSynchronization(null, ExpectedConditions.titleIs((String) object));
+	}
+	
 }

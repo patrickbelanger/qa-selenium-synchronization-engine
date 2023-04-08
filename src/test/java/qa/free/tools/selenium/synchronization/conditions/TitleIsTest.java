@@ -21,9 +21,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
@@ -31,59 +29,55 @@ import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class InvisibilityOfElementLocatedTest {
+class TitleIsTest {
 
 	private WebDriver webDriver;
-	private InvisibilityOfElementLocated underTest;
+	private TitleIs underTest;
 	
 	@BeforeEach
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
 		System.setProperty("webdriver.http.factory", "jdk-http-client");
 		webDriver = new ChromeDriver();
-		underTest = new InvisibilityOfElementLocated(webDriver);
+		underTest = new TitleIs(webDriver);
 	}
 	
 	@Test
-	void invisibilityOfElementLocated_ableToSynchronizeAWebElementAndElementIsVisible() {
+	void titleIs_ableToSynchronizeAWebElementAndTitleMatches() {
 		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
-		webDriver.switchTo().frame("iframeResult");
-		WebElement webElement = underTest.getWebElement(By.tagName("button"));
-		Assertions.assertNotNull(webElement);
-		Assertions.assertInstanceOf(WebElement.class, webElement);
-		Assertions.assertFalse(webElement.isDisplayed());
+		Assertions.assertTrue(underTest.isConditionMet("W3Schools Tryit Editor"));
 	}
 
 	@Test
-	void invisibilityOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
+	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getAlert();
 		});	
 	}
 
 	@Test
-	void invisibilityOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
+	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getNestedWebElement(null, null);
 		});
 	}
 	
 	@Test
-	void invisibilityOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
+	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getNestedWebElements(null, null);
 		});
 	}
 	
 	@Test
-	void invisibilityOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
+	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebDriverInstance(null);
 		});	
 	}
 	
 	@Test
-	void invisibilityOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
+	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebElements(null);
 		});
