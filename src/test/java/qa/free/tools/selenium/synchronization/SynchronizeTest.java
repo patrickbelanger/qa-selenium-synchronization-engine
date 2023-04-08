@@ -42,6 +42,7 @@ class SynchronizeTest {
 	@BeforeEach
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
+		System.setProperty("webdriver.http.factory", "jdk-http-client");
 		webDriver = new ChromeDriver();
 		underTest = new Synchronize(webDriver);
 	}
@@ -128,6 +129,12 @@ class SynchronizeTest {
 		Assertions.assertThrows(Exception.class, () -> {
 			underTest.synchronizeWebElement(SynchronizationMethods.ELEMENT_TO_BE_CLICKABLE, By.tagName("button"));
 		});
+	}
+	
+	@Test
+	void synchronize_ableToSynchronizeBasedOnWebpageTitle() {
+		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
+		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.TITLE_IS, "W3Schools Tryit Editor"));
 	}
 	
 	@AfterEach
