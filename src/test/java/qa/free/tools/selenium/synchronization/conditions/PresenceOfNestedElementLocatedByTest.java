@@ -39,6 +39,7 @@ class PresenceOfNestedElementLocatedByTest {
 	@BeforeEach
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
+		System.setProperty("webdriver.http.factory", "jdk-http-client");
 		webDriver = new ChromeDriver();
 		underTest = new PresenceOfNestedElementLocatedBy(webDriver);
 	}
