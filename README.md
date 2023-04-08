@@ -1,11 +1,12 @@
 # qa-selenium-synchronization-engine
-A library to ease the development of Selenium's powered automation framework by helping element synchronization and reducing boilerplate code.
+
+A library that facilitates element synchronization and minimizes boilerplate code to make the building of Selenium-powered automation frameworks easier.
 
 ## What is this project?
 
-The synchronization engine is a library helping you dealing with elements synchronization by providing a mechanism that reduce code boilerplate and return the wanted element(s). 
+The synchronization engine is a library that facilitates in element synchronization by offering a technique to reduce code boilerplate and return the desired element (s).
 
-Under the hood, the synchronization will perform 3 attempts to get the wanted element (the number of attempts is configuration through the .properties file). If the element cannot be synchronized, an ElementSynchronizationException will be triggered, allowing you to handle the exception if required.
+To get the desired element, the synchronization will make 3 attempts (the number of attempts is configuration through the .properties file). An ElementSynchronizationException will be raised in the event that the element cannot be synchronized, allowing you to intervene if necessary.
 
 ## How to use this project in my Page Object Model classes?
 
@@ -51,9 +52,13 @@ public void setFlightFrom(String iataCode) {
 
 ```
 
-As you can see, the synchronization engine reduce the amount of code you need to write to handle element synchronization. If an exception occurs, it will return an ElementSynchronizationException (which is a RuntimeException). 
+As you can see, using a synchronization engine makes it easier to handle element synchronization. It will return an 
+ElementSynchronizationException if an error occurs (which is a RuntimeException).
 
-With the example using plain Java and Selenium WebDriver, as a test automation developer, it's your responsability to handle the synchronization if the element is not synchronized. With the Synchronization engine, it reduce the burden. If implemented at the core of your framework, this will reduce considerably the amount of code required to perform this same exact action.
+If the element in the example using simple Java and Selenium WebDriver is not synced, it is your responsibility as 
+a test automation developer to handle the synchronization. By using the synchronization engine, the workload is reduced. 
+The amount of code needed to carry out this particular activity will be greatly decreased if integrated 
+at the framework's core.
 
 ```Java 
 public void setFlightFrom(String iataCode) {
@@ -62,17 +67,20 @@ public void setFlightFrom(String iataCode) {
 ```
 ## What are the benefits?
 
-1. Make element synchronization much simpler. Let the engine handling the burden to deal with element synchronization.
-2. Easy to configuration: you can adjust the number of attempt(s) and timeout duration using the .properties file to fit the reality of your project.
-3. Reduce boilerplate code (see examples above)
-4. Production-ready. The code base is scanned using SonarQube/Lint and integration testing have a test coverage up to 80%.
+1. Simplify the process of synchronizing elements. Give the engine the responsibility of taking care of element synchronization.
+2. Simple configuration: Using the.properties file, you may modify the number of attempts and timeout period to suit the specifics of your project.
+3. Reducing boilerplate code (see examples above)
+4. Able can be produced. SonarQube/Lint is used to scan the code base, and integration testing has test coverage of up to 80%.
 
 ## What are the common issues this library can solve?
 
-Element synchronization is one of the biggest issues a test automation developer has to experience on a daily basis. In Page Object Model classes, we tend to use the WebElementWait class across methods to deal with that issue. Sometimes, singleton patterns (synchronization helper classes) are created to handle this issue, but in reality, this leads to more flaky tests. 
+One of the major challenges a developer of test automation faces every day is element synchronization. To address that 
+problem, we frequently employ the WebElementWait class across methods in Page Object Model classes. Singleton patterns 
+(synchronization helper classes) are occasionally developed to address this problem, however in practice, this results 
+in more brittle testing.
 
-The synchronization engine helps resolve this issue by providing a reusable mechanism, helping to make test cases more resilient.
-
+The synchronization engine offers a reusable method that helps to tackle this problem and strengthens test cases.
 
 ### The code base is scanned using SonarQube/Lint
-The goal is creating a library you can trust and rely on. I'm currently working to increase the test coverage.
+
+The goal is creating a library you can trust and rely on.

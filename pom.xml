@@ -5,7 +5,7 @@
 	<groupId>qa.free.tools</groupId>
 	<artifactId>qa-selenium-synchronization-engine</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<description>A library to ease the development of Selenium's powered automation framework by helping element synchronization and reducing boilerplate code.</description>
+	<description>A library that facilitates element synchronization and minimizes boilerplate code to make the building of Selenium-powered automation frameworks easier.</description>
 
 	<developers>
 		<developer>
@@ -29,7 +29,7 @@
 		<logback.core.version>1.2.11</logback.core.version>
 		<lombok.version>1.18.22</lombok.version>
 		<owner.version>1.0.12</owner.version>
-		<selenium.version>4.4.0</selenium.version>
+		<selenium.version>4.8.0</selenium.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
