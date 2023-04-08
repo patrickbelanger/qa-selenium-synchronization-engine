@@ -109,6 +109,18 @@ public class Synchronize {
 		}
 	}
 	
+	public boolean synchronizeWebPage(SynchronizationMethods synchronizationMethod, String matcher) {
+		try {
+  		return ((SynchronizationEngine) 
+  				Class.forName(getConditionPackageName(synchronizationMethod))
+  					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).isConditionMet(matcher);
+		} catch(NotImplementedException e) {
+			throw new NotImplementedException(e);
+		} catch(Exception e) {
+			throw new ElementSynchronizationException(e);
+		}
+	}
+	
 	private String getConditionPackageName(SynchronizationMethods synchronizationMethods) {
 		return String.format("%s.conditions.%s", Synchronize.class.getPackageName(), synchronizationMethods.getClassName());
 	}

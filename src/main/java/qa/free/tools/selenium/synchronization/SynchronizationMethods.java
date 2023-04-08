@@ -32,7 +32,8 @@ public enum SynchronizationMethods {
 	PRESENCE_OF_NESTED_ELEMENT_LOCATED_BY("PresenceOfNestedElementLocatedBy"),
 	PRESENCE_OF_NESTED_ELEMENTS_LOCATED_BY("PresenceOfNestedElementsLocatedBy"),
 	VISIBILITY_OF_ELEMENT_LOCATED("VisibilityOfElementLocated"),
-	VISIBILITY_OF_ALL_ELEMENTS_LOCATED_BY("VisibilityOfAllElementsLocatedBy")
+	VISIBILITY_OF_ALL_ELEMENTS_LOCATED_BY("VisibilityOfAllElementsLocatedBy"),
+	TITLE_IS("TitleIs"),
 	;
 	
 	@Getter
