@@ -23,32 +23,29 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
+import qa.free.tools.selenium.synchronization.SynchronizeBaseTest;
 import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
 
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class AlertIsDisplayedTest {
+class AlertIsDisplayedTest extends SynchronizeBaseTest {
 
-	private WebDriver webDriver;
 	private AlertIsPresent underTest;
 	
 	@BeforeEach
 	public void setUp() {
-		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
-		System.setProperty("webdriver.http.factory", "jdk-http-client");
-		webDriver = new ChromeDriver();
-		underTest = new AlertIsPresent(webDriver);
+
+		super.setUp();
+		underTest = new AlertIsPresent(getWebDriver());
 	}
 	
 	@Test
 	void alertIsPresent_ableToSynchronizeAnAlertDialogAndInteractWithIt() {
-		webDriver.get("https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_alert");
-		webDriver.switchTo().frame("iframeResult");
-		webDriver.findElement(By.tagName("button")).click();
+		getWebDriver().get("https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_alert");
+		getWebDriver().switchTo().frame("iframeResult");
+		getWebDriver().findElement(By.tagName("button")).click();
 		Assertions.assertNotNull(underTest.getAlert());
 		Assertions.assertInstanceOf(Alert.class, underTest.getAlert());
 		Assertions.assertEquals("Hello! I am an alert box!", underTest.getAlert().getText());
@@ -92,7 +89,7 @@ class AlertIsDisplayedTest {
 	
 	@AfterEach
 	public void tearDown() {
-		webDriver.quit();
+		super.tearDown();
 		underTest = null;
 	}
 	

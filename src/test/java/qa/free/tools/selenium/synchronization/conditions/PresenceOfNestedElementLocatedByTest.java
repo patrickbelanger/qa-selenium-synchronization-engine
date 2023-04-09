@@ -22,32 +22,28 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
+import qa.free.tools.selenium.synchronization.SynchronizeBaseTest;
 import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
 
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class PresenceOfNestedElementLocatedByTest {
+class PresenceOfNestedElementLocatedByTest extends SynchronizeBaseTest {
 
-	private WebDriver webDriver;
 	private PresenceOfNestedElementLocatedBy underTest;
 	
 	@BeforeEach
 	public void setUp() {
-		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
-		System.setProperty("webdriver.http.factory", "jdk-http-client");
-		webDriver = new ChromeDriver();
-		underTest = new PresenceOfNestedElementLocatedBy(webDriver);
+		super.setUp();
+		underTest = new PresenceOfNestedElementLocatedBy(getWebDriver());
 	}
 	
 	@Test
 	void presenceOfNestedElementLocatedBy_ableToSynchronizeAChildWebElementAndElementIsPresent() {
-		webDriver.get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
-		webDriver.switchTo().frame("iframeResult");
+		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
+		getWebDriver().switchTo().frame("iframeResult");
 		WebElement webElement = underTest.getNestedWebElement(By.xpath("//table"), By.xpath("//tr/td"));
 		Assertions.assertNotNull(webElement);
 		Assertions.assertInstanceOf(WebElement.class, webElement);
@@ -92,7 +88,7 @@ class PresenceOfNestedElementLocatedByTest {
 	
 	@AfterEach
 	public void tearDown() {
-		webDriver.quit();
+		super.tearDown();
 		underTest = null;
 	}
 }

@@ -28,45 +28,45 @@ import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class TitleIsTest extends SynchronizeBaseTest {
+class TitleContainsTest extends SynchronizeBaseTest {
 
-	private TitleIs underTest;
+	private TitleContains underTest;
 	
 	@BeforeEach
 	public void setUp() {
 		super.setUp();
-		underTest = new TitleIs(getWebDriver());
+		underTest = new TitleContains(getWebDriver());
 	}
 	
 	@Test
-	void titleIs_ableToSynchronizeAWebElementAndTitleMatches() {
+	void titleContains_ableToSynchronizeAWebElementAndTitleMatches() {
 		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
-		Assertions.assertTrue(underTest.isConditionMet("W3Schools Tryit Editor"));
+		Assertions.assertTrue(underTest.isConditionMet("W3Schools"));
 	}
 
 	@Test
-	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
+	void titleContains_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getAlert();
 		});	
 	}
 
 	@Test
-	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
+	void titleContains_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getNestedWebElement(null, null);
 		});
 	}
 	
 	@Test
-	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
+	void titleContains_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getNestedWebElements(null, null);
 		});
 	}
 	
 	@Test
-	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
+	void titleContains_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebDriverInstance(null);
 		});	

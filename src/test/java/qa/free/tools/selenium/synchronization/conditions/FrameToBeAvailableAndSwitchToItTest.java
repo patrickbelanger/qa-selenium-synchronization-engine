@@ -22,33 +22,29 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
+import qa.free.tools.selenium.synchronization.SynchronizeBaseTest;
 import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
 
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class FrameToBeAvailableAndSwitchToItTest {
+class FrameToBeAvailableAndSwitchToItTest extends SynchronizeBaseTest {
 
-	private WebDriver webDriver;
 	private FrameToBeAvailableAndSwitchToIt underTest;
 	
 	@BeforeEach
 	public void setUp() {
-		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
-		System.setProperty("webdriver.http.factory", "jdk-http-client");
-		webDriver = new ChromeDriver();
-		underTest = new FrameToBeAvailableAndSwitchToIt(webDriver);
+		super.setUp();
+		underTest = new FrameToBeAvailableAndSwitchToIt(getWebDriver());
 	}
 	
 	@Test
 	void frameToBeAvailableAndSwitchToIt_ableToSynchronizeAndSwitchFrameUsingBy() {
-		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
-		webDriver = underTest.getWebDriverInstance(By.id("iframeResult"));
-		WebElement webElement = webDriver.findElement(By.tagName("button"));
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		setWebDriver(underTest.getWebDriverInstance(By.id("iframeResult")));
+		WebElement webElement = getWebDriver().findElement(By.tagName("button"));
 		Assertions.assertNotNull(webElement);
 		Assertions.assertInstanceOf(WebElement.class, webElement);
 		Assertions.assertTrue(webElement.isDisplayed());
@@ -56,9 +52,9 @@ class FrameToBeAvailableAndSwitchToItTest {
 	
 	@Test
 	void frameToBeAvailableAndSwitchToIt_ableToSynchronizeAndSwitchFrameUsingInteger() {
-		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
-		webDriver = underTest.getWebDriverInstance(0);
-		WebElement webElement = new ElementToBeClickable(webDriver).getWebElement(By.tagName("button"));
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		setWebDriver(underTest.getWebDriverInstance(0));
+		WebElement webElement = new ElementToBeClickable(getWebDriver()).getWebElement(By.tagName("button"));
 		Assertions.assertNotNull(webElement);
 		Assertions.assertInstanceOf(WebElement.class, webElement);
 		Assertions.assertTrue(webElement.isDisplayed());
@@ -66,9 +62,9 @@ class FrameToBeAvailableAndSwitchToItTest {
 	
 	@Test
 	void frameToBeAvailableAndSwitchToIt_ableToSynchronizeAndSwitchFrameUsingString() {
-		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
-		webDriver = underTest.getWebDriverInstance("iframeResult");
-		WebElement webElement = webDriver.findElement(By.tagName("button"));
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		setWebDriver(underTest.getWebDriverInstance("iframeResult"));
+		WebElement webElement = getWebDriver().findElement(By.tagName("button"));
 		Assertions.assertNotNull(webElement);
 		Assertions.assertInstanceOf(WebElement.class, webElement);
 		Assertions.assertTrue(webElement.isDisplayed());
@@ -76,10 +72,10 @@ class FrameToBeAvailableAndSwitchToItTest {
 
 	@Test
 	void frameToBeAvailableAndSwitchToIt_ableToSynchronizeAndSwitchFrameUsingWebElement() {
-		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
-		WebElement webElement = webDriver.findElement(By.id("iframeResult"));
-		webDriver = underTest.getWebDriverInstance(webElement);
-		webElement = webDriver.findElement(By.tagName("button"));
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		WebElement webElement = getWebDriver().findElement(By.id("iframeResult"));
+		setWebDriver(underTest.getWebDriverInstance(webElement));
+		webElement = getWebDriver().findElement(By.tagName("button"));
 		Assertions.assertNotNull(webElement);
 		Assertions.assertInstanceOf(WebElement.class, webElement);
 		Assertions.assertTrue(webElement.isDisplayed());
@@ -122,7 +118,7 @@ class FrameToBeAvailableAndSwitchToItTest {
 	
 	@AfterEach
 	public void tearDown() {
-		webDriver.quit();
+		super.tearDown();
 		underTest = null;
 	}
 }

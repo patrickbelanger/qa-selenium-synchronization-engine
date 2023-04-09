@@ -25,33 +25,28 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import qa.free.tools.selenium.synchronization.exceptions.ElementSynchronizationException;
 
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class SynchronizeTest {
+class SynchronizeTest extends SynchronizeBaseTest {
 	
-	private WebDriver webDriver;
 	private Synchronize underTest;
 	
 	@BeforeEach
 	public void setUp() {
-		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
-		System.setProperty("webdriver.http.factory", "jdk-http-client");
-		webDriver = new ChromeDriver();
-		underTest = new Synchronize(webDriver);
+		super.setUp();
+		underTest = new Synchronize(getWebDriver());
 	}
 	
 	@Test
 	void synchronizeAlert_ableToSynchronizeAnAlertDialogAndInteractWithIt() throws ElementSynchronizationException {
-		webDriver.get("https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_alert");
-		webDriver.switchTo().frame("iframeResult");
-		webDriver.findElement(By.tagName("button")).click();
+		getWebDriver().get("https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_alert");
+		getWebDriver().switchTo().frame("iframeResult");
+		getWebDriver().findElement(By.tagName("button")).click();
 		Assertions.assertNotNull(underTest.synchronizeAlert());
 		Assertions.assertInstanceOf(Alert.class, underTest.synchronizeAlert());
 		Assertions.assertEquals("Hello! I am an alert box!", underTest.synchronizeAlert().getText());
@@ -67,8 +62,8 @@ class SynchronizeTest {
 	
 	@Test
 	void synchronizeWebElement_ableToSynchronizeANestedWebElement() {
-		webDriver.get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
-		webDriver.switchTo().frame("iframeResult");
+		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
+		getWebDriver().switchTo().frame("iframeResult");
 		WebElement webElement = underTest.synchronizeNestedWebElement(By.xpath("//table"), By.xpath("//tr/td"));
 		Assertions.assertNotNull(webElement);
 		Assertions.assertInstanceOf(WebElement.class, webElement);
@@ -78,8 +73,8 @@ class SynchronizeTest {
 	
 	@Test
 	void synchronizeWebElement_ableToSynchronizeANestedWebElements() {
-		webDriver.get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
-		webDriver.switchTo().frame("iframeResult");
+		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
+		getWebDriver().switchTo().frame("iframeResult");
 		List<WebElement> webElements = underTest.synchronizeNestedWebElements(By.xpath("//table"), By.xpath("//tr/td"));
 		Assertions.assertNotNull(webElements);
 		Assertions.assertInstanceOf(List.class, webElements);
@@ -90,8 +85,8 @@ class SynchronizeTest {
 	
 	@Test
 	void synchronizeWebElement_ableToSynchronizeAWebElementAndClickAButton() {
-		webDriver.get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
-		webDriver.switchTo().frame("iframeResult");
+		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
+		getWebDriver().switchTo().frame("iframeResult");
 		List<WebElement> webElements = underTest
 				.synchronizeWebElements(SynchronizationMethods.PRESENCE_OF_ALL_ELEMENTS_LOCATED,By.xpath("//table//td"));
 		Assertions.assertNotNull(webElements);
@@ -101,8 +96,8 @@ class SynchronizeTest {
 	
 	@Test
 	void synchronizeWebElement_ableToSynchronizeAndGetAListOfElements() {
-		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
-		webDriver.switchTo().frame("iframeResult");
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		getWebDriver().switchTo().frame("iframeResult");
 		WebElement webElement = underTest
 				.synchronizeWebElement(SynchronizationMethods.ELEMENT_TO_BE_CLICKABLE, By.tagName("button"));
 		Assertions.assertNotNull(webElement);
@@ -112,7 +107,7 @@ class SynchronizeTest {
 	
 	@Test
 	void synchronizeWebElement_ableToSwitchFrame() {
-		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
 		underTest.synchronizeWebDriverInstance(SynchronizationMethods.FRAME_TO_BE_AVAILABLE_AND_SWITCH_TO_IT, 
 				"iframeResult");
 		WebElement webElement = underTest
@@ -124,8 +119,8 @@ class SynchronizeTest {
 	
 	@Test
 	void synchronizeWebElement_unableToSynchronizeAWebElementBecauseTheButtonIsDisabled() {
-		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
-		webDriver.switchTo().frame("iframeResult");
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
+		getWebDriver().switchTo().frame("iframeResult");
 		Assertions.assertThrows(Exception.class, () -> {
 			underTest.synchronizeWebElement(SynchronizationMethods.ELEMENT_TO_BE_CLICKABLE, By.tagName("button"));
 		});
@@ -133,13 +128,19 @@ class SynchronizeTest {
 	
 	@Test
 	void synchronize_ableToSynchronizeBasedOnWebpageTitle() {
-		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
 		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.TITLE_IS, "W3Schools Tryit Editor"));
+	}
+	
+	@Test
+	void synchronize_ableToSynchronizeBasedOnWebpageTitleContaingSpecificWord() {
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
+		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.TITLE_CONTAINS, "W3Schools"));
 	}
 	
 	@AfterEach
 	public void tearDown() {
-		webDriver.quit();
+		super.tearDown();
 		underTest = null;
 	}
 	

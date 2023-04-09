@@ -22,32 +22,28 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
+import qa.free.tools.selenium.synchronization.SynchronizeBaseTest;
 import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
 
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class PresenceOfElementLocatedTest {
+class PresenceOfElementLocatedTest extends SynchronizeBaseTest {
 
-	private WebDriver webDriver;
 	private PresenceOfElementLocated underTest;
 	
 	@BeforeEach
 	public void setUp() {
-		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
-		System.setProperty("webdriver.http.factory", "jdk-http-client");
-		webDriver = new ChromeDriver();
-		underTest = new PresenceOfElementLocated(webDriver);
+		super.setUp();
+		underTest = new PresenceOfElementLocated(getWebDriver());
 	}
 	
 	@Test
 	void presenceOfElementLocated_ableToSynchronizeAWebElementAndElementIsPresent() {
-		webDriver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
-		webDriver.switchTo().frame("iframeResult");
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		getWebDriver().switchTo().frame("iframeResult");
 		WebElement webElement = underTest.getWebElement(By.tagName("button"));
 		Assertions.assertNotNull(webElement);
 		Assertions.assertInstanceOf(WebElement.class, webElement);
@@ -91,7 +87,7 @@ class PresenceOfElementLocatedTest {
 	
 	@AfterEach
 	public void tearDown() {
-		webDriver.quit();
+		super.tearDown();
 		underTest = null;
 	}
 }
