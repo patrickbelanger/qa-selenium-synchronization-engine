@@ -8,6 +8,11 @@ The synchronization engine is a library that facilitates in element synchronizat
 
 To get the desired element, the synchronization will make 3 attempts (the number of attempts is configuration through the .properties file). An ElementSynchronizationException will be raised in the event that the element cannot be synchronized, allowing you to intervene if necessary.
 
+## Requirement
+
+* Java 11 SDK
+* Selenium 4.8.3
+
 ## How to use this project in my Page Object Model classes?
 
 For demonstrate the capability of the synchronization engine, here's an example:
