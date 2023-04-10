@@ -88,7 +88,7 @@ class SynchronizeTest extends SynchronizeBaseTest {
 		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
 		getWebDriver().switchTo().frame("iframeResult");
 		List<WebElement> webElements = underTest
-				.synchronizeWebElements(SynchronizationMethods.PRESENCE_OF_ALL_ELEMENTS_LOCATED,By.xpath("//table//td"));
+				.synchronizeWebElements(SynchronizationMethods.PRESENCE_OF_ALL_ELEMENTS_LOCATED_BY,By.xpath("//table//td"));
 		Assertions.assertNotNull(webElements);
 		Assertions.assertInstanceOf(List.class, webElements);
 		Assertions.assertTrue(webElements.size() > 1);

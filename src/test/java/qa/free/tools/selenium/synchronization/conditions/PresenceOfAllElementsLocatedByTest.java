@@ -32,13 +32,13 @@ import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class PresenceOfAllElementsLocatedTest extends SynchronizeBaseTest {
-	private PresenceOfAllElementsLocated underTest;
+class PresenceOfAllElementsLocatedByTest extends SynchronizeBaseTest {
+	private PresenceOfAllElementsLocatedBy underTest;
 	
 	@BeforeEach
 	public void setUp() {
 		super.setUp();
-		underTest = new PresenceOfAllElementsLocated(getWebDriver());
+		underTest = new PresenceOfAllElementsLocatedBy(getWebDriver());
 	}
 	
 	@Test

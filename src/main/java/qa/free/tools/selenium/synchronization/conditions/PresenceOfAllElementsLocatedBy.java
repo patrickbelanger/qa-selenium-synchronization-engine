@@ -29,9 +29,9 @@ import qa.free.tools.selenium.synchronization.SynchronizationEngine;
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class PresenceOfAllElementsLocated extends SynchronizationEngine {
+public class PresenceOfAllElementsLocatedBy extends SynchronizationEngine {
 
-	public PresenceOfAllElementsLocated(WebDriver webDriver) {
+	public PresenceOfAllElementsLocatedBy(WebDriver webDriver) {
 		super(webDriver);
 	}
 

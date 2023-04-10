@@ -28,7 +28,7 @@ public enum SynchronizationMethods {
 	FRAME_TO_BE_AVAILABLE_AND_SWITCH_TO_IT("FrameToBeAvailableAndSwitchToIt"),
 	INVISIBILITY_OF_ELEMENT_LOCATED("InvisibilityOfElementLocated"),
 	PRESENCE_OF_ELEMENT_LOCATED("PresenceOfElementLocated"),
-	PRESENCE_OF_ALL_ELEMENTS_LOCATED("PresenceOfAllElementsLocated"),
+	PRESENCE_OF_ALL_ELEMENTS_LOCATED_BY("PresenceOfAllElementsLocatedBy"),
 	PRESENCE_OF_NESTED_ELEMENT_LOCATED_BY("PresenceOfNestedElementLocatedBy"),
 	PRESENCE_OF_NESTED_ELEMENTS_LOCATED_BY("PresenceOfNestedElementsLocatedBy"),
 	VISIBILITY_OF_ELEMENT_LOCATED("VisibilityOfElementLocated"),
