@@ -39,7 +39,7 @@ class TitleContainsTest extends SynchronizeBaseTest {
 	}
 	
 	@Test
-	void titleContains_ableToSynchronizeAWebElementAndTitleMatches() {
+	void titleContains_ableToSynchronizeAWebpageAndTitleContainsSpecifiedValue() {
 		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
 		Assertions.assertTrue(underTest.isConditionMet("W3Schools"));
 	}

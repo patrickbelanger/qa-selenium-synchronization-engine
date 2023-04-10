@@ -35,6 +35,9 @@ public enum SynchronizationMethods {
 	VISIBILITY_OF_ALL_ELEMENTS_LOCATED_BY("VisibilityOfAllElementsLocatedBy"),
 	TITLE_CONTAINS("TitleContains"),
 	TITLE_IS("TitleIs"),
+	URL_CONTAINS("UrlContains"),
+	URL_MATCHES("UrlMatches"),
+	URL_TO_BE("UrlToBe")
 	;
 	
 	@Getter

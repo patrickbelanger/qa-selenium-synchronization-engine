@@ -28,52 +28,52 @@ import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class TitleIsTest extends SynchronizeBaseTest {
+class UrlMatchesTest extends SynchronizeBaseTest {
 
-	private TitleIs underTest;
+	private UrlContains underTest;
 	
 	@BeforeEach
 	public void setUp() {
 		super.setUp();
-		underTest = new TitleIs(getWebDriver());
+		underTest = new UrlContains(getWebDriver());
 	}
 	
 	@Test
-	void titleIs_ableToSynchronizeAWebpageBasedOnTheTitle() {
+	void urlToBe_ableToSynchronizeAWebPageAndUrlMatchesRegex() {
 		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
-		Assertions.assertTrue(underTest.isConditionMet("W3Schools Tryit Editor"));
+		Assertions.assertTrue(underTest.isConditionMet("\\A(http)"));
 	}
 
 	@Test
-	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
+	void urlToBe_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getAlert();
 		});	
 	}
 
 	@Test
-	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
+	void urlToBe_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getNestedWebElement(null, null);
 		});
 	}
 	
 	@Test
-	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
+	void urlToBe_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getNestedWebElements(null, null);
 		});
 	}
 	
 	@Test
-	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
+	void urlToBe_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebDriverInstance(null);
 		});	
 	}
 	
 	@Test
-	void titleIs_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
+	void urlToBe_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebElements(null);
 		});
