@@ -81,8 +81,9 @@ class PresenceOfNestedElementLocatedByTest extends SynchronizeBaseTest {
 	
 	@Test
 	void presenceOfNestedElementLocatedBy_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
+		By by = By.xpath("//html");
 		Assertions.assertThrows(NotImplementedException.class, () -> {
-			underTest.getWebElements(null);
+			underTest.getWebElements(by);
 		});
 	}
 	

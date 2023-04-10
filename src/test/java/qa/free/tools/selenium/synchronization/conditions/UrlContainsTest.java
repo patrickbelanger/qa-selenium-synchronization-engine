@@ -21,6 +21,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 
 import qa.free.tools.selenium.synchronization.SynchronizeBaseTest;
 import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
@@ -39,43 +40,44 @@ class UrlContainsTest extends SynchronizeBaseTest {
 	}
 	
 	@Test
-	void urlToBe_ableToSynchronizeAWebPageAndUrlContainsSpecifiedValue() {
+	void urlContains_ableToSynchronizeAWebPageAndUrlContainsSpecifiedValue() {
 		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
 		Assertions.assertTrue(underTest.isConditionMet("https://www.w3schools.com/tags/"));
 	}
 
 	@Test
-	void urlToBe_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
+	void urlContains_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getAlert();
 		});	
 	}
 
 	@Test
-	void urlToBe_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
+	void urlContains_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getNestedWebElement(null, null);
 		});
 	}
 	
 	@Test
-	void urlToBe_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
+	void urlContains_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getNestedWebElements(null, null);
 		});
 	}
 	
 	@Test
-	void urlToBe_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
+	void urlContains_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebDriverInstance(null);
 		});	
 	}
 	
 	@Test
-	void urlToBe_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
+	void urlContains_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
+		By by = By.xpath("//html");
 		Assertions.assertThrows(NotImplementedException.class, () -> {
-			underTest.getWebElements(null);
+			underTest.getWebElements(by);
 		});
 	}
 	

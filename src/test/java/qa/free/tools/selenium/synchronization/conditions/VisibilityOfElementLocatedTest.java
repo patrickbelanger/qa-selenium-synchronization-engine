@@ -84,8 +84,9 @@ class VisibilityOfElementLocatedTest {
 	
 	@Test
 	void visibilityOfElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
+		By by = By.xpath("//html");
 		Assertions.assertThrows(NotImplementedException.class, () -> {
-			underTest.getWebElements(null);
+			underTest.getWebElements(by);
 		});
 	}
 	
