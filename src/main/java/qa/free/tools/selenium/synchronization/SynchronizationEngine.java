@@ -140,6 +140,14 @@ public abstract class SynchronizationEngine {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
+	public WebElement getWebElement(By by, String text) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	public WebElement getWebElement(WebElement webElement, String text) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
 	public List<WebElement> getWebElements(By by) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
@@ -153,6 +161,14 @@ public abstract class SynchronizationEngine {
 	}
 	
 	public boolean isConditionMet(Object object) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	public boolean isConditionMet(By by, String text) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	public boolean isConditionMet(WebElement webElement, String text) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
