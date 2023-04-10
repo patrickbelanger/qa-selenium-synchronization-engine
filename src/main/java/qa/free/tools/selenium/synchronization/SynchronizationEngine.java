@@ -156,4 +156,12 @@ public abstract class SynchronizationEngine {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
+	public boolean isConditionMet(By by, String text) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
+	public boolean isConditionMet(WebElement webElement, String text) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
 }

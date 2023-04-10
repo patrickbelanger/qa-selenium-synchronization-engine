@@ -33,6 +33,7 @@ public enum SynchronizationMethods {
 	PRESENCE_OF_NESTED_ELEMENTS_LOCATED_BY("PresenceOfNestedElementsLocatedBy"),
 	VISIBILITY_OF_ELEMENT_LOCATED("VisibilityOfElementLocated"),
 	VISIBILITY_OF_ALL_ELEMENTS_LOCATED_BY("VisibilityOfAllElementsLocatedBy"),
+	TEXT_TO_BE_PRESENT_IN_ELEMENT("TextToBePresentInElement"),
 	TITLE_CONTAINS("TitleContains"),
 	TITLE_IS("TitleIs"),
 	URL_CONTAINS("UrlContains"),
