@@ -17,6 +17,7 @@
 
 package qa.free.tools.selenium.synchronization.conditions;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -33,7 +34,14 @@ public class TextToBePresentInElement extends SynchronizationEngine {
 	}
 	
 	@Override
+	public boolean isConditionMet(By by, String text) {
+		return isConditionMet(getWebDriver().findElement(by), text);
+	}
+	
+	
+	@Override
 	public boolean isConditionMet(WebElement webElement, String text) {
 		return performSynchronization(null, ExpectedConditions.textToBePresentInElement(webElement, text));
 	}
+	
 }

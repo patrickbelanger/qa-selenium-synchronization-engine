@@ -141,7 +141,8 @@ class SynchronizeTest extends SynchronizeBaseTest {
 	@Test
 	void synchronize_ableToSynchronizeBasedOnWebpageUrl() {
 		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
-		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.URL_TO_BE, "https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled"));
+		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.URL_TO_BE, 
+				"https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled"));
 	}
 	
 	@Test
@@ -154,6 +155,22 @@ class SynchronizeTest extends SynchronizeBaseTest {
 	void synchronize_ableToSynchronizeBasedOnWebpageUrlMatchesSpecificRegex() {
 		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
 		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.URL_MATCHES, "\\A(http)"));
+	}
+	
+	@Test
+	void synchronize_ableToSynchronizeBasedOnWebElementUsingText_usingByLocator() {
+		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
+		getWebDriver().switchTo().frame("iframeResult");
+		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.TEXT_TO_BE_PRESENT_IN_ELEMENT, 
+				By.xpath("//table"), "Helen Bennett"));
+	}
+	
+	@Test
+	void synchronize_ableToSynchronizeBasedOnWebElementUsingText_usingWebElement() {
+		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
+		getWebDriver().switchTo().frame("iframeResult");
+		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.TEXT_TO_BE_PRESENT_IN_ELEMENT, 
+				getWebDriver().findElement(By.xpath("//table")), "Helen Bennett"));
 	}
 	
 	@AfterEach
