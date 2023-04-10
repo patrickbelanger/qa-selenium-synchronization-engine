@@ -138,6 +138,24 @@ class SynchronizeTest extends SynchronizeBaseTest {
 		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.TITLE_CONTAINS, "W3Schools"));
 	}
 	
+	@Test
+	void synchronize_ableToSynchronizeBasedOnWebpageUrl() {
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
+		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.URL_TO_BE, "https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled"));
+	}
+	
+	@Test
+	void synchronize_ableToSynchronizeBasedOnWebpageUrlContaingSpecificWord() {
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
+		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.URL_CONTAINS, "w3Schools.com"));
+	}
+	
+	@Test
+	void synchronize_ableToSynchronizeBasedOnWebpageUrlMatchesSpecificRegex() {
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
+		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.URL_MATCHES, "\\A(http)"));
+	}
+	
 	@AfterEach
 	public void tearDown() {
 		super.tearDown();
