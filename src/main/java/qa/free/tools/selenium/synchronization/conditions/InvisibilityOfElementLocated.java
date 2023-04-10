@@ -34,8 +34,8 @@ public class InvisibilityOfElementLocated extends SynchronizationEngine {
 	}
 	
 	@Override
-	public WebElement getWebElement(By by) {
-		return performSynchronization(by, ExpectedConditions.invisibilityOfElementLocated(by));
+	public WebElement getWebElement(By locator) {
+		return performSynchronization(locator, ExpectedConditions.invisibilityOfElementLocated(locator));
 	}
 	
 }
