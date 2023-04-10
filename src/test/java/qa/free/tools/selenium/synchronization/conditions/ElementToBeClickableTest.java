@@ -80,8 +80,9 @@ class ElementToBeClickableTest extends SynchronizeBaseTest {
 	
 	@Test
 	void elementToBeClickable_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
+		By by = By.xpath("//html");
 		Assertions.assertThrows(NotImplementedException.class, () -> {
-			underTest.getWebElements(null);
+			underTest.getWebElements(by);
 		});
 	}
 	

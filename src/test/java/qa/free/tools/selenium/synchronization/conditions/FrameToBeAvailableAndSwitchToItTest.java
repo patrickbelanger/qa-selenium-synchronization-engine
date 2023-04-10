@@ -111,8 +111,9 @@ class FrameToBeAvailableAndSwitchToItTest extends SynchronizeBaseTest {
 	
 	@Test
 	void frameToBeAvailableAndSwitchToIt_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
+		By by = By.xpath("//html");
 		Assertions.assertThrows(NotImplementedException.class, () -> {
-			underTest.getWebElements(null);
+			underTest.getWebElements(by);
 		});
 	}
 	
