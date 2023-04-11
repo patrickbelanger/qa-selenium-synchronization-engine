@@ -17,14 +17,11 @@
 
 package qa.free.tools.selenium.synchronization.conditions;
 
-import java.util.List;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import qa.free.tools.selenium.synchronization.SynchronizeBaseTest;
 import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
@@ -32,71 +29,56 @@ import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class VisibilityOfAllElementsTest extends SynchronizeBaseTest {
-	
-	private VisibilityOfAllElements underTest;
+class StalenessOfTest extends SynchronizeBaseTest {
+
+	private StalenessOf underTest;
 	
 	@BeforeEach
 	public void setUp() {
 		super.setUp();
-		underTest = new VisibilityOfAllElements(getWebDriver());
+		underTest = new StalenessOf(getWebDriver());
 	}
 	
 	@Test
-	void visibilityOfAllElements_ableToSynchronizeAndGetAccessToEveryElements_arrayOfWebElements() {
-		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
-		getWebDriver().switchTo().frame("iframeResult");
-		WebElement rowOne = getWebDriver().findElement(By.xpath("(//table/tbody/tr)[1]"));
-		WebElement rowTwo = getWebDriver().findElement(By.xpath("(//table/tbody/tr)[2]"));
-		List<WebElement> webElements = underTest.getWebElements(rowOne, rowTwo);
-		Assertions.assertNotNull(webElements);
-		Assertions.assertInstanceOf(List.class, webElements);
-		Assertions.assertTrue(webElements.size() > 1);
+	void stalenessOf_ableToSynchronizeBasedOnStalenessOfElement() {
+		/* TODO FIND PROPER SCENARIO */
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		Assertions.assertTrue(underTest.isConditionMet(getWebDriver().findElement(By.xpath("//div[@class='detached']"))));
 	}
 
 	@Test
-	void visibilityOfAllElements_ableToSynchronizeAndGetAccessToEveryElements_listOfWebElements() {
-		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
-		getWebDriver().switchTo().frame("iframeResult");
-		List<WebElement> webElements = underTest.getWebElements(getWebDriver().findElements(By.xpath("//table/tbody/tr")));
-		Assertions.assertNotNull(webElements);
-		Assertions.assertInstanceOf(List.class, webElements);
-		Assertions.assertTrue(webElements.size() > 1);
-	}
-	
-	@Test
-	void visibilityOfAllElements_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
+	void stalenessOf_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getAlert();
-		});
+		});	
 	}
-	
+
 	@Test
-	void visibilityOfAllElements_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
+	void stalenessOf_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getNestedWebElement(null, null);
 		});
 	}
 	
 	@Test
-	void visibilityOfAllElements_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
+	void stalenessOf_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getNestedWebElements(null, null);
 		});
-	}	
+	}
 	
 	@Test
-	void visibilityOfAllElements_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
+	void stalenessOf_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebDriverInstance(null);
 		});	
 	}
 	
 	@Test
-	void visibilityOfAllElements_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementMethod() {
+	void stalenessOf_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
 		By by = By.xpath("//html");
 		Assertions.assertThrows(NotImplementedException.class, () -> {
-			underTest.getWebElement(by);
+			underTest.getWebElements(by);
 		});
 	}
 	

@@ -140,6 +140,10 @@ public abstract class SynchronizationEngine {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
+	public WebElement getWebElement(WebElement webElement) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
 	public WebElement getWebElement(By locator, String text) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
@@ -164,11 +168,15 @@ public abstract class SynchronizationEngine {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
+	public boolean isConditionMet(By locator, String text) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
 	public boolean isConditionMet(Object object) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
-	public boolean isConditionMet(By locator, String text) {
+	public boolean isConditionMet(WebElement webElement) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	

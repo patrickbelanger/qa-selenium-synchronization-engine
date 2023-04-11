@@ -17,7 +17,6 @@
 
 package qa.free.tools.selenium.synchronization.conditions;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,20 +26,15 @@ import qa.free.tools.selenium.synchronization.SynchronizationEngine;
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class ElementToBeClickable extends SynchronizationEngine {
+public class StalenessOf extends SynchronizationEngine {
 
-	public ElementToBeClickable(WebDriver webDriver) {
+	public StalenessOf(WebDriver webDriver) {
 		super(webDriver);
 	}
 	
 	@Override
-	public WebElement getWebElement(By by) {
-		return performSynchronization(by, ExpectedConditions.elementToBeClickable(by));
-	}
-	
-	@Override
-	public WebElement getWebElement(WebElement webElement) {
-		return performSynchronization(null, ExpectedConditions.elementToBeClickable(webElement));
+	public boolean isConditionMet(WebElement webElement) {
+		return performSynchronization(null, ExpectedConditions.stalenessOf(webElement));
 	}
 	
 }

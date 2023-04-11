@@ -75,8 +75,9 @@ class AlertIsDisplayedTest extends SynchronizeBaseTest {
 	
 	@Test
 	void alertIsPresent_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementMethod() {
+		By by = By.xpath("//html");
 		Assertions.assertThrows(NotImplementedException.class, () -> {
-			underTest.getWebElement(null);
+			underTest.getWebElement(by);
 		});	
 	}
 	

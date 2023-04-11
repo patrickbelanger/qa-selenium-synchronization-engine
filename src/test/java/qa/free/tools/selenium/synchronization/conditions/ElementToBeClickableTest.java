@@ -41,11 +41,21 @@ class ElementToBeClickableTest extends SynchronizeBaseTest {
 	}
 	
 	@Test
-	void elementToBeClickable_ableToSynchronizeAWebElementAndClickAButton() {
+	void elementToBeClickable_ableToSynchronizeAWebElementAndClickAButton_usingByLocator() {
 		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
 		getWebDriver().switchTo().frame("iframeResult");
 		WebElement webElement = underTest.getWebElement(By.tagName("button"));
 		Assertions.assertNotNull(webElement);
+		Assertions.assertInstanceOf(WebElement.class, webElement);
+		webElement.click();
+	}
+	
+	@Test
+	void elementToBeClickable_ableToSynchronizeAWebElementAndClickAButton_usingWebElement() {
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		getWebDriver().switchTo().frame("iframeResult");
+		WebElement webElement = getWebDriver().findElement(By.tagName("button"));
+		Assertions.assertNotNull(underTest.getWebElement(webElement));
 		Assertions.assertInstanceOf(WebElement.class, webElement);
 		webElement.click();
 	}
