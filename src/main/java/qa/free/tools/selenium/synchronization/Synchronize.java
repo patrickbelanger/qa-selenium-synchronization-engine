@@ -97,6 +97,18 @@ public class Synchronize {
 		}
 	}
 	
+	public boolean isSynchronized(SynchronizationMethods synchronizationMethod, By locator) {
+		try {
+  		return ((SynchronizationEngine) 
+  				Class.forName(getConditionPackageName(synchronizationMethod))
+  					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).isConditionMet(locator);
+		} catch(NotImplementedException e) {
+			throw new NotImplementedException(e);
+		} catch(Exception e) {
+			throw new ElementSynchronizationException(e);
+		}
+	}
+	
 	public boolean isSynchronized(SynchronizationMethods synchronizationMethod, By locator, String text) {
 		try {
   		return ((SynchronizationEngine) 
