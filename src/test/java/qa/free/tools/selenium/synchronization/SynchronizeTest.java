@@ -173,6 +173,14 @@ class SynchronizeTest extends SynchronizeBaseTest {
 				getWebDriver().findElement(By.xpath("//table")), "Helen Bennett"));
 	}
 	
+	@Test
+	void synchronize_ableToSynchronizeBasedOnWebElementUsingInvisibilityOfSpecifiedText_usingByLocator() {
+		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
+		getWebDriver().switchTo().frame("iframeResult");
+		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.INVISIBILITY_OF_ELEMENT_WITH_TEXT, 
+				By.xpath("//table"), "Helen Robert"));
+	}
+	
 	@AfterEach
 	public void tearDown() {
 		super.tearDown();

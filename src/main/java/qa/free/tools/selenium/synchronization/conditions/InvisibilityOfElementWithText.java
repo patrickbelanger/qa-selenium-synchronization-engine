@@ -19,7 +19,6 @@ package qa.free.tools.selenium.synchronization.conditions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import qa.free.tools.selenium.synchronization.SynchronizationEngine;
@@ -32,9 +31,9 @@ public class InvisibilityOfElementWithText extends SynchronizationEngine {
 	public InvisibilityOfElementWithText(WebDriver webDriver) {
 		super(webDriver);
 	}
-	
+
 	@Override
-	public WebElement getWebElement(By locator, String text) {
+	public boolean isConditionMet(By locator, String text) {
 		return performSynchronization(locator, ExpectedConditions.invisibilityOfElementWithText(locator, text));
 	}
 	
