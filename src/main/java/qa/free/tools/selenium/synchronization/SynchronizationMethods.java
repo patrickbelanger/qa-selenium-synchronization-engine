@@ -27,18 +27,22 @@ public enum SynchronizationMethods {
 	ELEMENT_TO_BE_CLICKABLE("ElementToBeClickable"),
 	FRAME_TO_BE_AVAILABLE_AND_SWITCH_TO_IT("FrameToBeAvailableAndSwitchToIt"),
 	INVISIBILITY_OF_ELEMENT_LOCATED("InvisibilityOfElementLocated"),
-	PRESENCE_OF_ELEMENT_LOCATED("PresenceOfElementLocated"),
+	INVISIBILITY_OF_ELEMENT_WITH_TEXT("InvisibilityOfElementWithText"),
 	PRESENCE_OF_ALL_ELEMENTS_LOCATED_BY("PresenceOfAllElementsLocatedBy"),
+	PRESENCE_OF_ELEMENT_LOCATED("PresenceOfElementLocated"),
 	PRESENCE_OF_NESTED_ELEMENT_LOCATED_BY("PresenceOfNestedElementLocatedBy"),
 	PRESENCE_OF_NESTED_ELEMENTS_LOCATED_BY("PresenceOfNestedElementsLocatedBy"),
-	VISIBILITY_OF_ELEMENT_LOCATED("VisibilityOfElementLocated"),
-	VISIBILITY_OF_ALL_ELEMENTS_LOCATED_BY("VisibilityOfAllElementsLocatedBy"),
 	TEXT_TO_BE_PRESENT_IN_ELEMENT("TextToBePresentInElement"),
+	TEXT_TO_BE_PRESENT_IN_ELEMENT_LOCATED("TextToBePresentInElementLocated"),
+	TEXT_TO_BE_PRESENT_IN_ELEMENT_VALUE("TextToBePresentInElementValue"),
 	TITLE_CONTAINS("TitleContains"),
 	TITLE_IS("TitleIs"),
 	URL_CONTAINS("UrlContains"),
 	URL_MATCHES("UrlMatches"),
-	URL_TO_BE("UrlToBe")
+	URL_TO_BE("UrlToBe"),
+	VISIBILITY_OF_ALL_ELEMENTS_LOCATED_BY("VisibilityOfAllElementsLocatedBy"),
+	VISIBILITY_OF_ALL_ELEMENTS("VisibilityOfAllElements"),
+	VISIBILITY_OF_ELEMENT_LOCATED("VisibilityOfElementLocated"),
 	;
 	
 	@Getter

@@ -33,6 +33,7 @@ import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
 class VisibilityOfAllElementsTest extends SynchronizeBaseTest {
+	
 	private VisibilityOfAllElements underTest;
 	
 	@BeforeEach
