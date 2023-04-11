@@ -32,6 +32,7 @@ public enum SynchronizationMethods {
 	PRESENCE_OF_ELEMENT_LOCATED("PresenceOfElementLocated"),
 	PRESENCE_OF_NESTED_ELEMENT_LOCATED_BY("PresenceOfNestedElementLocatedBy"),
 	PRESENCE_OF_NESTED_ELEMENTS_LOCATED_BY("PresenceOfNestedElementsLocatedBy"),
+	STALENESS_OF("StalenessOf"),
 	TEXT_TO_BE_PRESENT_IN_ELEMENT("TextToBePresentInElement"),
 	TEXT_TO_BE_PRESENT_IN_ELEMENT_LOCATED("TextToBePresentInElementLocated"),
 	TEXT_TO_BE_PRESENT_IN_ELEMENT_VALUE("TextToBePresentInElementValue"),
