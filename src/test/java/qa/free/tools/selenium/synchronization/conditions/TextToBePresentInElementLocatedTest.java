@@ -17,14 +17,11 @@
 
 package qa.free.tools.selenium.synchronization.conditions;
 
-import java.util.List;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import qa.free.tools.selenium.synchronization.SynchronizeBaseTest;
 import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
@@ -32,58 +29,56 @@ import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-class PresenceOfAllElementsLocatedByTest extends SynchronizeBaseTest {
-	
-	private PresenceOfAllElementsLocatedBy underTest;
+class TextToBePresentInElementLocatedTest extends SynchronizeBaseTest {
+
+	private TextToBePresentInElementLocated underTest;
 	
 	@BeforeEach
 	public void setUp() {
 		super.setUp();
-		underTest = new PresenceOfAllElementsLocatedBy(getWebDriver());
+		underTest = new TextToBePresentInElementLocated(getWebDriver());
 	}
 	
 	@Test
-	void presenceOfAllElementsLocated_ableToSynchronizeAndGetAccessToEveryElements() {
+	void textToBePresentInElementLocated_ableToSynchronizeAWebElementBasedOnText_usingByLocator() {
 		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
 		getWebDriver().switchTo().frame("iframeResult");
-		List<WebElement> webElements = underTest.getWebElements(By.xpath("//table//td"));
-		Assertions.assertNotNull(webElements);
-		Assertions.assertInstanceOf(List.class, webElements);
-		Assertions.assertTrue(webElements.size() > 1);
+		Assertions.assertTrue(underTest.isConditionMet(By.xpath("//table"), "Helen Bennett"));
+	}
+	
+	@Test
+	void textToBePresentInElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
+		Assertions.assertThrows(NotImplementedException.class, () -> {
+			underTest.getAlert();
+		});	
 	}
 
 	@Test
-	void presenceOfAllElementsLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeAlertMethod() {
-		Assertions.assertThrows(NotImplementedException.class, () -> {
-			underTest.getAlert();
-		});
-	}
-	
-	@Test
-	void presenceOfAllElementsLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
+	void textToBePresentInElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getNestedWebElement(null, null);
 		});
 	}
 	
 	@Test
-	void presenceOfAllElementsLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
+	void textToBePresentInElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeNestedWebElementsMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getNestedWebElements(null, null);
 		});
-	}	
+	}
 	
 	@Test
-	void presenceOfAllElementsLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
+	void textToBePresentInElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebDriverInstanceMethod() {
 		Assertions.assertThrows(NotImplementedException.class, () -> {
 			underTest.getWebDriverInstance(null);
 		});	
 	}
 	
 	@Test
-	void presenceOfAllElementsLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementMethod() {
+	void textToBePresentInElementLocated_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementsMethod() {
+		By by = By.xpath("//html");
 		Assertions.assertThrows(NotImplementedException.class, () -> {
-			underTest.getWebElement(null);
+			underTest.getWebElements(by);
 		});
 	}
 	

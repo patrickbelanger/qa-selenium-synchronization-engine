@@ -34,8 +34,8 @@ public class VisibilityOfElementLocated extends SynchronizationEngine {
 	}
 	
 	@Override
-	public WebElement getWebElement(By by) {
-		return performSynchronization(by, ExpectedConditions.visibilityOfElementLocated(by));
+	public WebElement getWebElement(By locator) {
+		return performSynchronization(locator, ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 	
 }

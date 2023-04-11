@@ -17,8 +17,6 @@
 
 package qa.free.tools.selenium.synchronization.conditions;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,15 +27,21 @@ import qa.free.tools.selenium.synchronization.SynchronizationEngine;
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class VisibilityOfAllElementsLocatedBy extends SynchronizationEngine {
+public class TextToBePresentInElementValue extends SynchronizationEngine {
 
-	public VisibilityOfAllElementsLocatedBy(WebDriver webDriver) {
+	public TextToBePresentInElementValue(WebDriver webDriver) {
 		super(webDriver);
 	}
 	
 	@Override
-	public List<WebElement> getWebElements(By locator) {
-		return performSynchronization(locator, ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+	public boolean isConditionMet(By locator, String text) {
+		return  performSynchronization(null, ExpectedConditions.textToBePresentInElementValue(locator, text));
+	}
+	
+	
+	@Override
+	public boolean isConditionMet(WebElement webElement, String text) {
+		return performSynchronization(null, ExpectedConditions.textToBePresentInElementValue(webElement, text));
 	}
 	
 }

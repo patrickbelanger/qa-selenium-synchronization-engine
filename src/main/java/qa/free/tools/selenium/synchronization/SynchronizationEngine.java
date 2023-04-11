@@ -91,7 +91,7 @@ public abstract class SynchronizationEngine {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected <V, T> V performSynchronization(By by, ExpectedCondition<T> expectedCondition) {
+	protected <V, T> V performSynchronization(By locator, ExpectedCondition<T> expectedCondition) {
 		for (int i = 0; i < synchronizationProperties.getMaximumRetryAttempts(); i++) {
 			try {
 				V element = (V) getWait().until((Function<? super WebDriver, Object>) expectedCondition);
@@ -105,7 +105,7 @@ public abstract class SynchronizationEngine {
 			}
 		}
 		logger.error("Unable to perform element synchronization after {} attempt(s)", getSynchronizationAttempts());
-		throw new ElementSynchronizationException(String.format("Unable to find element %s", by));
+		throw new ElementSynchronizationException(String.format("Unable to find element %s", locator));
 	}
 	
 	private <T> void logSynchronizationElement(Object object, ExpectedCondition<T> expectedCondition) {
@@ -136,11 +136,11 @@ public abstract class SynchronizationEngine {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
-	public WebElement getWebElement(By by) {
+	public WebElement getWebElement(By locator) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
-	public WebElement getWebElement(By by, String text) {
+	public WebElement getWebElement(By locator, String text) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
@@ -148,7 +148,7 @@ public abstract class SynchronizationEngine {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
-	public List<WebElement> getWebElements(By by) {
+	public List<WebElement> getWebElements(By locator) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
@@ -164,7 +164,7 @@ public abstract class SynchronizationEngine {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
-	public boolean isConditionMet(By by, String text) {
+	public boolean isConditionMet(By locator, String text) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	

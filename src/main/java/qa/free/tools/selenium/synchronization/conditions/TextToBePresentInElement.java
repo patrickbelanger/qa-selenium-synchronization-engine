@@ -34,8 +34,8 @@ public class TextToBePresentInElement extends SynchronizationEngine {
 	}
 	
 	@Override
-	public boolean isConditionMet(By by, String text) {
-		return isConditionMet(getWebDriver().findElement(by), text);
+	public boolean isConditionMet(By locator, String text) {
+		return isConditionMet(getWebDriver().findElement(locator), text);
 	}
 	
 	

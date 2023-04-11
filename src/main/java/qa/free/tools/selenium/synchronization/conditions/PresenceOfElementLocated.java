@@ -34,8 +34,8 @@ public class PresenceOfElementLocated extends SynchronizationEngine {
 	}
 	
 	@Override
-	public WebElement getWebElement(By by) {
-		return performSynchronization(by, ExpectedConditions.presenceOfElementLocated(by));
+	public WebElement getWebElement(By locator) {
+		return performSynchronization(locator, ExpectedConditions.presenceOfElementLocated(locator));
 	}
 	
 }
