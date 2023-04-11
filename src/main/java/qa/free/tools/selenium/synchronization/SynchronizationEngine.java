@@ -140,6 +140,10 @@ public abstract class SynchronizationEngine {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
+	public WebElement getWebElement(WebElement webElement) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
 	public WebElement getWebElement(By locator, String text) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}

@@ -38,4 +38,9 @@ public class ElementToBeClickable extends SynchronizationEngine {
 		return performSynchronization(by, ExpectedConditions.elementToBeClickable(by));
 	}
 	
+	@Override
+	public WebElement getWebElement(WebElement webElement) {
+		return performSynchronization(null, ExpectedConditions.elementToBeClickable(webElement));
+	}
+	
 }

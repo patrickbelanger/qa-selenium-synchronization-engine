@@ -94,8 +94,9 @@ class VisibilityOfAllElementsTest extends SynchronizeBaseTest {
 	
 	@Test
 	void visibilityOfAllElements_anExceptionIsRaisedWhenAttemptingCallingSynchronizeWebElementMethod() {
+		By by = By.xpath("//html");
 		Assertions.assertThrows(NotImplementedException.class, () -> {
-			underTest.getWebElement(null);
+			underTest.getWebElement(by);
 		});
 	}
 	
