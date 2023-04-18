@@ -25,6 +25,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import qa.free.tools.selenium.synchronization.exceptions.ElementSynchronizationException;
+import qa.free.tools.selenium.synchronization.exceptions.IncompatibleSynchronizationMethodClassTypeReturnException;
 import qa.free.tools.selenium.synchronization.exceptions.NotImplementedException;
 
 public class Synchronize {	
@@ -48,6 +49,10 @@ public class Synchronize {
 	}
 	
 	public WebDriver synchronizeWebDriverInstance(SynchronizationMethods synchronizationMethod, Object object) {
+		if (!isSynchronizationClassTypeWebDriver(synchronizationMethod)) {
+			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
+					synchronizationMethod.getClassName(), getCurrentMethodName());
+		}
 		try {
   		return ((SynchronizationEngine) 
   				Class.forName(getConditionPackageName(synchronizationMethod))
@@ -86,6 +91,10 @@ public class Synchronize {
 	}
 	
 	public WebElement synchronizeWebElement(SynchronizationMethods synchronizationMethod, By locator) {
+		if (!isSynchronizationClassTypeWebElement(synchronizationMethod)) {
+			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
+					synchronizationMethod.getClassName(), getCurrentMethodName());
+		}
 		try {
   		return ((SynchronizationEngine) 
   				Class.forName(getConditionPackageName(synchronizationMethod))
@@ -98,6 +107,10 @@ public class Synchronize {
 	}
 	
 	public boolean isSynchronized(SynchronizationMethods synchronizationMethod, By locator) {
+		if (!isSynchronizationClassTypeBoolean(synchronizationMethod)) {
+			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
+					synchronizationMethod.getClassName(), getCurrentMethodName());
+		}
 		try {
   		return ((SynchronizationEngine) 
   				Class.forName(getConditionPackageName(synchronizationMethod))
@@ -110,6 +123,10 @@ public class Synchronize {
 	}
 	
 	public boolean isSynchronized(SynchronizationMethods synchronizationMethod, By locator, String text) {
+		if (!isSynchronizationClassTypeBoolean(synchronizationMethod)) {
+			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
+					synchronizationMethod.getClassName(), getCurrentMethodName());
+		}
 		try {
   		return ((SynchronizationEngine) 
   				Class.forName(getConditionPackageName(synchronizationMethod))
@@ -122,6 +139,10 @@ public class Synchronize {
 	}
 	
 	public boolean isSynchronized(SynchronizationMethods synchronizationMethod, WebElement webElement, String text) {
+		if (!isSynchronizationClassTypeBoolean(synchronizationMethod)) {
+			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
+					synchronizationMethod.getClassName(), getCurrentMethodName());
+		}
 		try {
   		return ((SynchronizationEngine) 
   				Class.forName(getConditionPackageName(synchronizationMethod))
@@ -134,6 +155,10 @@ public class Synchronize {
 	}
 	
 	public List<WebElement> synchronizeWebElements(SynchronizationMethods synchronizationMethod, By locator) {
+		if (!isSynchronizationClassTypeList(synchronizationMethod)) {
+			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
+					synchronizationMethod.getClassName(), getCurrentMethodName());
+		}
 		try {
   		return ((SynchronizationEngine) 
   				Class.forName(getConditionPackageName(synchronizationMethod))
@@ -146,6 +171,10 @@ public class Synchronize {
 	}
 	
 	public boolean synchronizeWebPage(SynchronizationMethods synchronizationMethod, String matcher) {
+		if (!isSynchronizationClassTypeBoolean(synchronizationMethod)) {
+			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
+					synchronizationMethod.getClassName(), getCurrentMethodName());
+		}
 		try {
   		return ((SynchronizationEngine) 
   				Class.forName(getConditionPackageName(synchronizationMethod))
@@ -155,6 +184,30 @@ public class Synchronize {
 		} catch(Exception e) {
 			throw new ElementSynchronizationException(e);
 		}
+	}
+	
+	private String getCurrentMethodName() {
+		return new Throwable().getStackTrace()[0].getMethodName();
+	}
+	
+	private boolean isSynchronizationClassTypeBoolean(SynchronizationMethods synchronizationMethod) {
+		return isSynchronizationClassTypeReturnMatch(synchronizationMethod, Boolean.class);
+	}
+	
+	private boolean isSynchronizationClassTypeList(SynchronizationMethods synchronizationMethod) {
+		return isSynchronizationClassTypeReturnMatch(synchronizationMethod, List.class);
+	}
+	
+	private boolean isSynchronizationClassTypeWebDriver(SynchronizationMethods synchronizationMethod) {
+		return isSynchronizationClassTypeReturnMatch(synchronizationMethod, WebDriver.class);
+	}
+	
+	private boolean isSynchronizationClassTypeWebElement(SynchronizationMethods synchronizationMethod) {
+		return isSynchronizationClassTypeReturnMatch(synchronizationMethod, WebElement.class);
+	}
+	
+	private boolean isSynchronizationClassTypeReturnMatch(SynchronizationMethods synchronizationMethod, Class<?> target) {
+		return synchronizationMethod.getClassType().equals(target);
 	}
 	
 	private String getConditionPackageName(SynchronizationMethods synchronizationMethods) {

@@ -17,40 +17,50 @@
 
 package qa.free.tools.selenium.synchronization;
 
+import java.util.List;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 import lombok.Getter;
 
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
 public enum SynchronizationMethods {
-	ALERT_IS_PRESENT("AlertIsPresent"),
-	ELEMENT_TO_BE_CLICKABLE("ElementToBeClickable"),
-	FRAME_TO_BE_AVAILABLE_AND_SWITCH_TO_IT("FrameToBeAvailableAndSwitchToIt"),
-	INVISIBILITY_OF_ELEMENT_LOCATED("InvisibilityOfElementLocated"),
-	INVISIBILITY_OF_ELEMENT_WITH_TEXT("InvisibilityOfElementWithText"),
-	PRESENCE_OF_ALL_ELEMENTS_LOCATED_BY("PresenceOfAllElementsLocatedBy"),
-	PRESENCE_OF_ELEMENT_LOCATED("PresenceOfElementLocated"),
-	PRESENCE_OF_NESTED_ELEMENT_LOCATED_BY("PresenceOfNestedElementLocatedBy"),
-	PRESENCE_OF_NESTED_ELEMENTS_LOCATED_BY("PresenceOfNestedElementsLocatedBy"),
-	STALENESS_OF("StalenessOf"),
-	TEXT_TO_BE_PRESENT_IN_ELEMENT("TextToBePresentInElement"),
-	TEXT_TO_BE_PRESENT_IN_ELEMENT_LOCATED("TextToBePresentInElementLocated"),
-	TEXT_TO_BE_PRESENT_IN_ELEMENT_VALUE("TextToBePresentInElementValue"),
-	TITLE_CONTAINS("TitleContains"),
-	TITLE_IS("TitleIs"),
-	URL_CONTAINS("UrlContains"),
-	URL_MATCHES("UrlMatches"),
-	URL_TO_BE("UrlToBe"),
-	VISIBILITY_OF_ALL_ELEMENTS_LOCATED_BY("VisibilityOfAllElementsLocatedBy"),
-	VISIBILITY_OF_ALL_ELEMENTS("VisibilityOfAllElements"),
-	VISIBILITY_OF_ELEMENT_LOCATED("VisibilityOfElementLocated"),
+	ALERT_IS_PRESENT("AlertIsPresent", Alert.class),
+	ELEMENT_TO_BE_CLICKABLE("ElementToBeClickable", WebElement.class),
+	FRAME_TO_BE_AVAILABLE_AND_SWITCH_TO_IT("FrameToBeAvailableAndSwitchToIt", WebDriver.class),
+	INVISIBILITY_OF_ELEMENT_LOCATED("InvisibilityOfElementLocated", Boolean.class),
+	INVISIBILITY_OF_ELEMENT_WITH_TEXT("InvisibilityOfElementWithText", Boolean.class),
+	PRESENCE_OF_ALL_ELEMENTS_LOCATED_BY("PresenceOfAllElementsLocatedBy", List.class),
+	PRESENCE_OF_ELEMENT_LOCATED("PresenceOfElementLocated", WebElement.class),
+	PRESENCE_OF_NESTED_ELEMENT_LOCATED_BY("PresenceOfNestedElementLocatedBy", WebElement.class),
+	PRESENCE_OF_NESTED_ELEMENTS_LOCATED_BY("PresenceOfNestedElementsLocatedBy", List.class),
+	STALENESS_OF("StalenessOf", WebElement.class),
+	TEXT_TO_BE_PRESENT_IN_ELEMENT("TextToBePresentInElement", Boolean.class),
+	TEXT_TO_BE_PRESENT_IN_ELEMENT_LOCATED("TextToBePresentInElementLocated", Boolean.class),
+	TEXT_TO_BE_PRESENT_IN_ELEMENT_VALUE("TextToBePresentInElementValue", Boolean.class),
+	TITLE_CONTAINS("TitleContains", Boolean.class),
+	TITLE_IS("TitleIs", Boolean.class),
+	URL_CONTAINS("UrlContains", Boolean.class),
+	URL_MATCHES("UrlMatches", Boolean.class),
+	URL_TO_BE("UrlToBe", Boolean.class),
+	VISIBILITY_OF_ALL_ELEMENTS_LOCATED_BY("VisibilityOfAllElementsLocatedBy", List.class),
+	VISIBILITY_OF_ALL_ELEMENTS("VisibilityOfAllElements", List.class),
+	VISIBILITY_OF_ELEMENT_LOCATED("VisibilityOfElementLocated", WebElement.class),
 	;
 	
 	@Getter
 	private String className;
 	
-	private SynchronizationMethods(String className) {
+	@Getter
+	private Class<?> classType;
+	
+	private SynchronizationMethods(String className, Class<?> classType) {
 		this.className = className;
+		this.classType = classType;
 	}
 	
 }

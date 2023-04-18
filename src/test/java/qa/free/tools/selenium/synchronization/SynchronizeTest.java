@@ -25,6 +25,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import qa.free.tools.selenium.synchronization.exceptions.ElementSynchronizationException;
@@ -61,6 +62,28 @@ class SynchronizeTest extends SynchronizeBaseTest {
 	}
 	
 	@Test
+	void synchronizeWebDriverInstance_ableToSwitchFrame() {
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		WebDriver webbDriver = underTest.synchronizeWebDriverInstance(SynchronizationMethods.FRAME_TO_BE_AVAILABLE_AND_SWITCH_TO_IT, 
+				"iframeResult");
+		Assertions.assertInstanceOf(WebDriver.class, webbDriver);
+		/* Able to continue further after switching frame */
+		WebElement webElement = underTest
+				.synchronizeWebElement(SynchronizationMethods.ELEMENT_TO_BE_CLICKABLE, By.tagName("button"));
+		Assertions.assertNotNull(webElement);
+		Assertions.assertInstanceOf(WebElement.class, webElement);
+		webElement.click();
+	}
+	
+	@Test
+	void synchronizeWebDriverInstance_shouldThrowAnExceptionIfTheMethodDoesntReturnAWebDriver() {
+		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
+		Assertions.assertThrows(Exception.class, () -> {
+			underTest.synchronizeWebDriverInstance(SynchronizationMethods.ELEMENT_TO_BE_CLICKABLE, "iframeResult");
+		});
+	}
+	
+	@Test
 	void synchronizeWebElement_ableToSynchronizeANestedWebElement() {
 		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
 		getWebDriver().switchTo().frame("iframeResult");
@@ -84,18 +107,27 @@ class SynchronizeTest extends SynchronizeBaseTest {
 	}
 	
 	@Test
-	void synchronizeWebElement_ableToSynchronizeAWebElementAndClickAButton() {
+	void synchronizeWebElements_ableToSynchronizeWebElementsAndClickAButton() {
 		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
 		getWebDriver().switchTo().frame("iframeResult");
 		List<WebElement> webElements = underTest
-				.synchronizeWebElements(SynchronizationMethods.PRESENCE_OF_ALL_ELEMENTS_LOCATED_BY,By.xpath("//table//td"));
+				.synchronizeWebElements(SynchronizationMethods.PRESENCE_OF_ALL_ELEMENTS_LOCATED_BY, By.xpath("//table//td"));
 		Assertions.assertNotNull(webElements);
 		Assertions.assertInstanceOf(List.class, webElements);
 		Assertions.assertTrue(webElements.size() > 1);
 	}
 	
+	@Test 
+	void synchronizeWebElements_shouldThrowAnExceptionIfTheMethodDoesntReturnAList() {
+		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
+		getWebDriver().switchTo().frame("iframeResult");
+		Assertions.assertThrows(Exception.class, () -> {
+			underTest.synchronizeWebElements(SynchronizationMethods.PRESENCE_OF_ELEMENT_LOCATED, By.xpath("//table//td"));
+		});
+	}
+	
 	@Test
-	void synchronizeWebElement_ableToSynchronizeAndGetAListOfElements() {
+	void synchronizeWebElement_ableToSynchronizeAWebElementAndPerformAClick() {
 		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
 		getWebDriver().switchTo().frame("iframeResult");
 		WebElement webElement = underTest
@@ -105,16 +137,13 @@ class SynchronizeTest extends SynchronizeBaseTest {
 		webElement.click();
 	}
 	
-	@Test
-	void synchronizeWebElement_ableToSwitchFrame() {
-		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_test");
-		underTest.synchronizeWebDriverInstance(SynchronizationMethods.FRAME_TO_BE_AVAILABLE_AND_SWITCH_TO_IT, 
-				"iframeResult");
-		WebElement webElement = underTest
-				.synchronizeWebElement(SynchronizationMethods.ELEMENT_TO_BE_CLICKABLE, By.tagName("button"));
-		Assertions.assertNotNull(webElement);
-		Assertions.assertInstanceOf(WebElement.class, webElement);
-		webElement.click();
+	@Test 
+	void synchronizeWebElement_shouldThrowAnExceptionIfTheMethodDoesntReturnAWebElement() {
+		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
+		getWebDriver().switchTo().frame("iframeResult");
+		Assertions.assertThrows(Exception.class, () -> {
+			underTest.synchronizeWebElements(SynchronizationMethods.ALERT_IS_PRESENT, By.xpath("//table//td"));
+		});
 	}
 	
 	@Test
@@ -127,38 +156,38 @@ class SynchronizeTest extends SynchronizeBaseTest {
 	}
 	
 	@Test
-	void synchronize_ableToSynchronizeBasedOnWebpageTitle() {
+	void synchronizeWebPage_ableToSynchronizeBasedOnWebpageTitle() {
 		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
 		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.TITLE_IS, "W3Schools Tryit Editor"));
 	}
 	
 	@Test
-	void synchronize_ableToSynchronizeBasedOnWebpageTitleContaingSpecificWord() {
+	void synchronizeWebPage_ableToSynchronizeBasedOnWebpageTitleContaingSpecificWord() {
 		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
 		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.TITLE_CONTAINS, "W3Schools"));
 	}
 	
 	@Test
-	void synchronize_ableToSynchronizeBasedOnWebpageUrl() {
+	void synchronizeWebPage_ableToSynchronizeBasedOnWebpageUrl() {
 		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
 		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.URL_TO_BE, 
 				"https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled"));
 	}
 	
 	@Test
-	void synchronize_ableToSynchronizeBasedOnWebpageUrlContaingSpecificWord() {
+	void synchronizeWebPage_ableToSynchronizeBasedOnWebpageUrlContaingSpecificWord() {
 		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
-		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.URL_CONTAINS, "w3Schools.com"));
+		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.URL_CONTAINS, "w3schools.com"));
 	}
 	
 	@Test
-	void synchronize_ableToSynchronizeBasedOnWebpageUrlMatchesSpecificRegex() {
+	void synchronizeWebPage_ableToSynchronizeBasedOnWebpageUrlMatchesSpecificRegex() {
 		getWebDriver().get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_button_disabled");
 		Assertions.assertTrue(underTest.synchronizeWebPage(SynchronizationMethods.URL_MATCHES, "\\A(http)"));
 	}
 	
 	@Test
-	void synchronize_ableToSynchronizeBasedOnWebElementUsingText_usingByLocator() {
+	void isSynchronize_ableToSynchronizeBasedOnWebElementUsingText_usingByLocator() {
 		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
 		getWebDriver().switchTo().frame("iframeResult");
 		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.TEXT_TO_BE_PRESENT_IN_ELEMENT, 
@@ -166,7 +195,7 @@ class SynchronizeTest extends SynchronizeBaseTest {
 	}
 	
 	@Test
-	void synchronize_ableToSynchronizeBasedOnWebElementUsingText_usingWebElement() {
+	void iSynchronize_ableToSynchronizeBasedOnWebElementUsingText_usingWebElement() {
 		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
 		getWebDriver().switchTo().frame("iframeResult");
 		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.TEXT_TO_BE_PRESENT_IN_ELEMENT, 
@@ -174,7 +203,7 @@ class SynchronizeTest extends SynchronizeBaseTest {
 	}
 	
 	@Test
-	void synchronize_ableToSynchronizeBasedOnWebElementUsingInvisibilityOfSpecifiedText_usingByLocator() {
+	void isSynchronize_ableToSynchronizeBasedOnWebElementUsingInvisibilityOfSpecifiedText_usingByLocator() {
 		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
 		getWebDriver().switchTo().frame("iframeResult");
 		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.INVISIBILITY_OF_ELEMENT_WITH_TEXT, 
