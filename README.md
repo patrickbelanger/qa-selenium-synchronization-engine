@@ -77,8 +77,9 @@ public void setFlightFrom(String iataCode) {
 1. Simplify the process of synchronizing elements. Give the engine the responsibility of taking care of element synchronization.
 2. Simple configuration: Using the.properties file, you may modify the number of attempts and timeout period to suit the specifics of your project.
 3. Reducing boilerplate code (see examples above)
-4. Able can be produced. SonarQube/Lint is used to scan the code base, and integration testing has test coverage of up to 80%.
+4. Production-ready: SonarQube/Lint is used to scan the code base, and integration testing has test coverage of up to 80%.
 5. You can now fully rely on the synchronization engine! This means that you no longer need to manually search for web elements using the `webDriver.findElement(...)` or `webDriver.findElements()` methods. The synchronization engine takes care of this for you automatically.
+6. Ease the development of Page Object Model classes; easier to read and maintain.
 
 ```Java
 private final Synchronize synchronize;
