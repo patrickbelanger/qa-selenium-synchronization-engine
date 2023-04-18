@@ -11,6 +11,7 @@ To get the desired element, the synchronization will make 3 attempts (the number
 ## Requirement
 
 * Java 11 SDK
+* Lombok (Eclipse: Make sure to install the Lombok plugin)
 * Selenium 4.8.3
 
 ## How to use this project in my Page Object Model classes?
@@ -76,6 +77,7 @@ public void setFlightFrom(String iataCode) {
 2. Simple configuration: Using the.properties file, you may modify the number of attempts and timeout period to suit the specifics of your project.
 3. Reducing boilerplate code (see examples above)
 4. Able can be produced. SonarQube/Lint is used to scan the code base, and integration testing has test coverage of up to 80%.
+5. You can now fully rely on the synchronization engine! This means that you no longer need to manually search for web elements using the `webDriver.findElement(...)` or `webDriver.findElements()` methods. The synchronization engine takes care of this for you automatically.
 
 ## What are the common issues this library can solve?
 
