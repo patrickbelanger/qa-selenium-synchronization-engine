@@ -95,19 +95,19 @@ private By loginButton = By.name("login-button");
 
 public void setUsername(String username) {
 	synchronize
-		.synchronizeWebElement(SynchronizationMethods.PRESENCE_OF_ELEMENT_LOCATED, inputUsername);
+		.synchronizeWebElement(SynchronizationMethods.PRESENCE_OF_ELEMENT_LOCATED, inputUsername)
 		.sendKeys(username);
 }
 
 public void setPassword(String password) {
 	synchronize
-		.synchronizeWebElement(SynchronizationMethods.PRESENCE_OF_ELEMENT_LOCATED, inputPassword);
+		.synchronizeWebElement(SynchronizationMethods.PRESENCE_OF_ELEMENT_LOCATED, inputPassword)
 		.sendKeys(password);
 }
 
 public void clickButtonLogin() {
 	synchronize
-		.synchronizeWebElement(SynchronizationMethods.ELEMENT_TO_BE_CLICKABLE, loginButton);
+		.synchronizeWebElement(SynchronizationMethods.ELEMENT_TO_BE_CLICKABLE, loginButton)
 		.click();
 }
 
