@@ -71,6 +71,7 @@ public void setFlightFrom(String iataCode) {
 	select().customInputList(By.name("from"), By.xpath("//div[@class='autocomplete-result']//b"), iataCode); // The framework method calls the synchronization engine for you, and perform the required action against this element
 }
 ```
+
 ## What are the benefits?
 
 1. Simplify the process of synchronizing elements. Give the engine the responsibility of taking care of element synchronization.
@@ -78,6 +79,44 @@ public void setFlightFrom(String iataCode) {
 3. Reducing boilerplate code (see examples above)
 4. Able can be produced. SonarQube/Lint is used to scan the code base, and integration testing has test coverage of up to 80%.
 5. You can now fully rely on the synchronization engine! This means that you no longer need to manually search for web elements using the `webDriver.findElement(...)` or `webDriver.findElements()` methods. The synchronization engine takes care of this for you automatically.
+
+```Java
+private final Synchronize synchronize;
+private final WebDriver webDriver;
+
+public LoginPage(WebDriver webDriver) {
+	this.webDriver = webDriver;
+	this.synchronize = new Synchronize(webDriver);
+}
+
+private By inputUsername = By.name("username");
+private By inputPassword = By.name("password");
+private By loginButton = By.name("login-button");
+
+public void setUsername(String username) {
+	synchronize
+		.synchronizeWebElement(SynchronizationMethods.PRESENCE_OF_ELEMENT_LOCATED, inputUsername);
+		.sendKeys(username);
+}
+
+public void setPassword(String password) {
+	synchronize
+		.synchronizeWebElement(SynchronizationMethods.PRESENCE_OF_ELEMENT_LOCATED, inputPassword);
+		.sendKeys(password);
+}
+
+public void clickButtonLogin() {
+	synchronize
+		.synchronizeWebElement(SynchronizationMethods.ELEMENT_TO_BE_CLICKABLE, loginButton);
+		.click();
+}
+
+public void fillLoginScreen(Account account) {
+	setUsername(account.getUsername());
+	setPassword(account.getPassword());
+	clickButtonLogin();
+}
+```
 
 ## What are the common issues this library can solve?
 
