@@ -122,6 +122,22 @@ public class Synchronize {
 		}
 	}
 	
+	public boolean isSynchronized(SynchronizationMethods synchronizationMethod, int number) {
+		if (!isSynchronizationClassTypeBoolean(synchronizationMethod)) {
+			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
+					synchronizationMethod.getClassName(), getCurrentMethodName());
+		}
+		try {
+  		return ((SynchronizationEngine) 
+  				Class.forName(getConditionPackageName(synchronizationMethod))
+  					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).isConditionMet(number);
+		} catch(NotImplementedException e) {
+			throw new NotImplementedException(e);
+		} catch(Exception e) {
+			throw new ElementSynchronizationException(e);
+		}
+	}
+	
 	public boolean isSynchronized(SynchronizationMethods synchronizationMethod, By locator, String text) {
 		if (!isSynchronizationClassTypeBoolean(synchronizationMethod)) {
 			throw new IncompatibleSynchronizationMethodClassTypeReturnException(

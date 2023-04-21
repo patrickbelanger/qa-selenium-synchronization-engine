@@ -34,6 +34,7 @@ public enum SynchronizationMethods {
 	FRAME_TO_BE_AVAILABLE_AND_SWITCH_TO_IT("FrameToBeAvailableAndSwitchToIt", WebDriver.class),
 	INVISIBILITY_OF_ELEMENT_LOCATED("InvisibilityOfElementLocated", Boolean.class),
 	INVISIBILITY_OF_ELEMENT_WITH_TEXT("InvisibilityOfElementWithText", Boolean.class),
+	NUMBER_OF_WINDOWS_TO_BE("NumberOfWindowsToBe", Boolean.class),
 	PRESENCE_OF_ALL_ELEMENTS_LOCATED_BY("PresenceOfAllElementsLocatedBy", List.class),
 	PRESENCE_OF_ELEMENT_LOCATED("PresenceOfElementLocated", WebElement.class),
 	PRESENCE_OF_NESTED_ELEMENT_LOCATED_BY("PresenceOfNestedElementLocatedBy", WebElement.class),
