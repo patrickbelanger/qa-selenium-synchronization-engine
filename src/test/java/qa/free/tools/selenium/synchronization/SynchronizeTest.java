@@ -187,7 +187,14 @@ class SynchronizeTest extends SynchronizeBaseTest {
 	}
 	
 	@Test
-	void isSynchronize_ableToSynchronizeBasedOnWebElementUsingText_usingByLocator() {
+	void isSynchronized_ableToSynchronizeBasedOnNumberOfOpenedWindows() {
+		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
+		getWebDriver().switchTo().frame("iframeResult");
+		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.NUMBER_OF_WINDOWS_TO_BE, 1));
+	}
+	
+	@Test
+	void isSynchronized_ableToSynchronizeBasedOnWebElementUsingText_usingByLocator() {
 		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
 		getWebDriver().switchTo().frame("iframeResult");
 		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.TEXT_TO_BE_PRESENT_IN_ELEMENT, 
@@ -195,7 +202,7 @@ class SynchronizeTest extends SynchronizeBaseTest {
 	}
 	
 	@Test
-	void iSynchronize_ableToSynchronizeBasedOnWebElementUsingText_usingWebElement() {
+	void iSynchronized_ableToSynchronizeBasedOnWebElementUsingText_usingWebElement() {
 		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
 		getWebDriver().switchTo().frame("iframeResult");
 		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.TEXT_TO_BE_PRESENT_IN_ELEMENT, 
@@ -203,7 +210,7 @@ class SynchronizeTest extends SynchronizeBaseTest {
 	}
 	
 	@Test
-	void isSynchronize_ableToSynchronizeBasedOnWebElementUsingInvisibilityOfSpecifiedText_usingByLocator() {
+	void isSynchronized_ableToSynchronizeBasedOnWebElementUsingInvisibilityOfSpecifiedText_usingByLocator() {
 		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro");
 		getWebDriver().switchTo().frame("iframeResult");
 		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.INVISIBILITY_OF_ELEMENT_WITH_TEXT, 

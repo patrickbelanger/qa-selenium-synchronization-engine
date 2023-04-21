@@ -172,6 +172,10 @@ public abstract class SynchronizationEngine {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}
 	
+	public boolean isConditionMet(int number) {
+		throw new NotImplementedException(getExceptionDetails(this.getClass()));
+	}
+	
 	public boolean isConditionMet(Object object) {
 		throw new NotImplementedException(getExceptionDetails(this.getClass()));
 	}

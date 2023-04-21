@@ -15,33 +15,25 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package qa.free.tools.selenium.synchronization;
+package qa.free.tools.selenium.synchronization.conditions;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import lombok.Data;
+import qa.free.tools.selenium.synchronization.SynchronizationEngine;
 
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-@Data
-public abstract class SynchronizeBaseTest {
+public class NumberOfWindowsToBe extends SynchronizationEngine {
 
-	private WebDriver webDriver;
-	
-	@BeforeEach
-	public void setUp() {
-		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
-		System.setProperty("webdriver.http.factory", "jdk-http-client");
-		webDriver = new ChromeDriver();
+	public NumberOfWindowsToBe(WebDriver webDriver) {
+		super(webDriver);
 	}
 	
-	@AfterEach
-	public void tearDown() {
-		webDriver.quit();
+	@Override
+	public boolean isConditionMet(int number) {
+		return performSynchronization(null, ExpectedConditions.numberOfWindowsToBe(number));
 	}
 	
 }
