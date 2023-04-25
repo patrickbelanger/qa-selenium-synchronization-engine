@@ -31,6 +31,7 @@ import lombok.Getter;
 public enum SynchronizationMethods {
 	ALERT_IS_PRESENT("AlertIsPresent", Alert.class),
 	ELEMENT_TO_BE_CLICKABLE("ElementToBeClickable", WebElement.class),
+	ELEMENT_TO_BE_SELECTED("ElementToBeSelected", Boolean.class),
 	FRAME_TO_BE_AVAILABLE_AND_SWITCH_TO_IT("FrameToBeAvailableAndSwitchToIt", WebDriver.class),
 	INVISIBILITY_OF_ELEMENT_LOCATED("InvisibilityOfElementLocated", Boolean.class),
 	INVISIBILITY_OF_ELEMENT_WITH_TEXT("InvisibilityOfElementWithText", Boolean.class),

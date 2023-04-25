@@ -217,6 +217,14 @@ class SynchronizeTest extends SynchronizeBaseTest {
 				By.xpath("//table"), "Helen Robert"));
 	}
 	
+	@Test
+	void isSynchronized_ableToSynchronizeBasedOnASelectedElement() {
+		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_elem_select_pre");
+		getWebDriver().switchTo().frame("iframeResult");
+		WebElement webElement = getWebDriver().findElement(By.xpath("//option[@value='fiat']"));
+		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.ELEMENT_TO_BE_SELECTED, webElement));
+	}
+	
 	@AfterEach
 	public void tearDown() {
 		super.tearDown();
