@@ -154,6 +154,22 @@ public class Synchronize {
 		}
 	}
 	
+	public boolean isSynchronized(SynchronizationMethods synchronizationMethod, WebElement webElement) {
+		if (!isSynchronizationClassTypeBoolean(synchronizationMethod)) {
+			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
+					synchronizationMethod.getClassName(), getCurrentMethodName());
+		}
+		try {
+  		return ((SynchronizationEngine) 
+  				Class.forName(getConditionPackageName(synchronizationMethod))
+  					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).isConditionMet(webElement);
+		} catch(NotImplementedException e) {
+			throw new NotImplementedException(e);
+		} catch(Exception e) {
+			throw new ElementSynchronizationException(e);
+		}
+	}
+	
 	public boolean isSynchronized(SynchronizationMethods synchronizationMethod, WebElement webElement, String text) {
 		if (!isSynchronizationClassTypeBoolean(synchronizationMethod)) {
 			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
