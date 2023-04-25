@@ -12,7 +12,7 @@ To get the desired element, the synchronization will make 3 attempts (the number
 
 * Java 11 SDK
 * Lombok (Eclipse: Make sure to install the Lombok plugin)
-* Selenium 4.8.3
+* Selenium 4.9.0
 
 ## How to use this project in my Page Object Model classes?
 
