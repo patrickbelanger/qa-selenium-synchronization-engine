@@ -27,7 +27,7 @@ Example using plain Java and Selenium WebDriver
 ```Java
 
 public void setFlightFrom(String iataCode) {
-	WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+	WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
 	try {
 		webDriver().findElement(By.name("from").sendKeys(iataCode);
 		List<WebElements> webElements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='autocomplete-result']//b"));
