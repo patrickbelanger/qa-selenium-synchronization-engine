@@ -138,6 +138,22 @@ public class Synchronize {
 		}
 	}
 	
+	public boolean isSynchronized(SynchronizationMethods synchronizationMethod, By locator, boolean condition) {
+		if (!isSynchronizationClassTypeBoolean(synchronizationMethod)) {
+			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
+					synchronizationMethod.getClassName(), getCurrentMethodName());
+		}
+		try {
+  		return ((SynchronizationEngine) 
+  				Class.forName(getConditionPackageName(synchronizationMethod))
+  					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).isConditionMet(locator, condition);
+		} catch(NotImplementedException e) {
+			throw new NotImplementedException(e);
+		} catch(Exception e) {
+			throw new ElementSynchronizationException(e);
+		}
+	}
+	
 	public boolean isSynchronized(SynchronizationMethods synchronizationMethod, By locator, String text) {
 		if (!isSynchronizationClassTypeBoolean(synchronizationMethod)) {
 			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
@@ -163,6 +179,22 @@ public class Synchronize {
   		return ((SynchronizationEngine) 
   				Class.forName(getConditionPackageName(synchronizationMethod))
   					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).isConditionMet(webElement);
+		} catch(NotImplementedException e) {
+			throw new NotImplementedException(e);
+		} catch(Exception e) {
+			throw new ElementSynchronizationException(e);
+		}
+	}
+	
+	public boolean isSynchronized(SynchronizationMethods synchronizationMethod, WebElement webElement, boolean condition) {
+		if (!isSynchronizationClassTypeBoolean(synchronizationMethod)) {
+			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
+					synchronizationMethod.getClassName(), getCurrentMethodName());
+		}
+		try {
+  		return ((SynchronizationEngine) 
+  				Class.forName(getConditionPackageName(synchronizationMethod))
+  					.getDeclaredConstructor(WebDriver.class).newInstance(webDriver)).isConditionMet(webElement, condition);
 		} catch(NotImplementedException e) {
 			throw new NotImplementedException(e);
 		} catch(Exception e) {

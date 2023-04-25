@@ -225,6 +225,31 @@ class SynchronizeTest extends SynchronizeBaseTest {
 		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.ELEMENT_TO_BE_SELECTED, webElement));
 	}
 	
+	
+	@Test
+	void isSynchronized_ableToSynchronizeBasedOnStateOfSelectedElement_usingBy() {
+		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_elem_select_pre");
+		getWebDriver().switchTo().frame("iframeResult");
+		By fiat = By.xpath("//option[@value='fiat']");
+		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.ELEMENT_SELECTION_STATE_TO_BE, fiat, true));
+		Assertions.assertEquals("Fiat", getWebDriver().findElement(fiat).getText());
+		By volvo = By.xpath("//option[@value='volvo']");
+		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.ELEMENT_SELECTION_STATE_TO_BE, volvo, false));
+		Assertions.assertEquals("Volvo", getWebDriver().findElement(volvo).getText());
+		}
+	
+	@Test
+	void isSynchronized_ableToSynchronizeBasedOnStateOfSelectedElement_usingWebElement() {
+		getWebDriver().get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_elem_select_pre");
+		getWebDriver().switchTo().frame("iframeResult");
+		WebElement webElement = getWebDriver().findElement(By.xpath("//option[@value='fiat']"));
+		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.ELEMENT_SELECTION_STATE_TO_BE, webElement, true));
+		Assertions.assertEquals("Fiat", webElement.getText());
+		webElement = getWebDriver().findElement(By.xpath("//option[@value='volvo']"));
+		Assertions.assertTrue(underTest.isSynchronized(SynchronizationMethods.ELEMENT_SELECTION_STATE_TO_BE, webElement, false));
+		Assertions.assertEquals("Volvo", webElement.getText());
+	}
+	
 	@AfterEach
 	public void tearDown() {
 		super.tearDown();
