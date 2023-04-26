@@ -35,7 +35,7 @@ public class ElementSelectionStateToBe extends SynchronizationEngine {
 	
 	@Override
 	public boolean isConditionMet(By locator, boolean condition) {
-		return performSynchronization(null, ExpectedConditions.elementSelectionStateToBe(locator, condition));
+		return performSynchronization(locator, ExpectedConditions.elementSelectionStateToBe(locator, condition));
 	}
 	
 	@Override

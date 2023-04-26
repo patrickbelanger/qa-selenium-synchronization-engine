@@ -26,15 +26,15 @@ import io.github.patrickbelanger.selenium.synchronization.SynchronizationEngine;
 /**
  * @author pbelanger <1848500+patrickbelanger@users.noreply.github.com>
  */
-public class AttributeToBe extends SynchronizationEngine {
+public class TextToBe extends SynchronizationEngine {
 
-	public AttributeToBe(WebDriver webDriver) {
+	public TextToBe(WebDriver webDriver) {
 		super(webDriver);
 	}
 	
 	@Override
-	public boolean isConditionMet(By locator, String attribute, String value) {
-		return performSynchronization(locator, ExpectedConditions.attributeToBe(locator, attribute, value));
+	public boolean isConditionMet(By locator, String text) {
+		return performSynchronization(locator, ExpectedConditions.textToBe(locator, text));
 	}
 	
 }
