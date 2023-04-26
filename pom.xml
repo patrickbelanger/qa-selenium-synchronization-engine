@@ -2,20 +2,39 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>qa.free.tools</groupId>
+	
+	<groupId>io.github.patrickbelanger</groupId>
 	<artifactId>qa-selenium-synchronization-engine</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	
+	<name>qa-selenium-synchronization-engine</name>
 	<description>A library that facilitates element synchronization and minimizes boilerplate code to make the building of Selenium-powered automation frameworks easier.</description>
+	<url>https://github.com/patrickbelanger/qa-selenium-synchronization-engine</url>
 
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	
+	<issueManagement>
+		<url>https://github.com/patrickbelanger/qa-selenium-synchronization-engine/issues</url>
+	</issueManagement>
+	
 	<developers>
 		<developer>
 			<id>patrickbelanger</id>
 			<name>Patrick Belanger</name>
 			<email>1848500+patrickbelanger@users.noreply.github.com</email>
 			<roles>
-				<role>qa</role>
-				<role>specialist test automation developer</role>
+				<role>senior software developer</role>
+				<role>former specialist test automation developer</role>
+				<role>former - qa</role>
 			</roles>
+			<organization>Sonatype</organization>
+      		<organizationUrl>http://www.sonatype.com</organizationUrl>
 			<timezone>America/Montreal</timezone>
 			<properties>
 				<picUrl>https://avatars.githubusercontent.com/u/1848500?v=4</picUrl>
@@ -23,6 +42,17 @@
 		</developer>
 	</developers>
 
+	<organization>
+		<name>qa-free-tools</name>
+		<url>https://github.com/qa-free-tools</url>
+	</organization>
+
+	<scm>
+  		<connection>scm:git:git://github.com/patrickbelanger/qa-selenium-synchronization-engine.git</connection>
+  		<developerConnection>scm:git:ssh://github.com/patrickbelanger/qa-selenium-synchronization-engine.git</developerConnection>
+  		<url>https://github.com/patrickbelanger/qa-selenium-synchronization-engine/tree/master</url>
+	</scm>
+	
 	<properties>
 		<jacoco.version>0.8.8</jacoco.version>
 		<junit.version>5.8.2</junit.version>
@@ -130,10 +160,10 @@
 			<version>${selenium.version}</version>
 		</dependency>
 		<dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-http-jdk-client</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-http-jdk-client</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -146,16 +176,4 @@
 		</dependency>
 	</dependencies>
 
-	<name>qa-selenium-synchronization-engine</name>
-	<scm>
-		<url>https://github.com/patrickbelanger/qa-selenium-synchronization-engine</url>
-		<developerConnection>Patrick Bélanger</developerConnection>
-	</scm>
-	<organization>
-		<name>qa-free-tools</name>
-		<url>https://github.com/qa-free-tools</url>
-	</organization>
-	<issueManagement>
-		<url>https://github.com/patrickbelanger/qa-selenium-synchronization-engine/issues</url>
-	</issueManagement>
 </project>

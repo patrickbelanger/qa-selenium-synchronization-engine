@@ -4,9 +4,9 @@ A library that facilitates element synchronization and minimizes boilerplate cod
 
 ## What is this project?
 
-The synchronization engine is a library that facilitates in element synchronization by offering a technique to reduce code boilerplate and return the desired element (s).
+The synchronization engine is a library that facilitates in element synchronization by offering a technique to reduce code boilerplate and return the desired element(s).
 
-To get the desired element, the synchronization will make 3 attempts (the number of attempts is configuration through the .properties file). An ElementSynchronizationException will be raised in the event that the element cannot be synchronized, allowing you to intervene if necessary.
+To get the desired element, the synchronization will make 3 attempts (or the number of attempts is configuration through the .properties file). An ElementSynchronizationException will be raised in the event that the element cannot be synchronized, allowing you to intervene if necessary.
 
 ## Requirement
 
@@ -58,13 +58,9 @@ public void setFlightFrom(String iataCode) {
 
 ```
 
-As you can see, using a synchronization engine makes it easier to handle element synchronization. It will return an 
-ElementSynchronizationException if an error occurs (which is a RuntimeException).
+Your automation framework can be made more efficient by using the synchronization engine to handle element synchronization. An ElementSynchronizationException, a RuntimeException, will be consequently thrown by the engine if a synchronization problem takes place.
 
-If the element in the example using simple Java and Selenium WebDriver is not synced, it is your responsibility as 
-a test automation developer to handle the synchronization. By using the synchronization engine, the workload is reduced. 
-The amount of code needed to carry out this particular activity will be greatly decreased if integrated 
-at the framework's core.
+Without the synchronization engine, test automation developers must manage element synchronization manually, which can be a time-consuming and error-prone operation. Your framework will be more effective and simpler to maintain if you use a synchronization engine to drastically minimize the amount of code required to complete this task.
 
 ```Java 
 public void setFlightFrom(String iataCode) {
@@ -75,12 +71,13 @@ public void setFlightFrom(String iataCode) {
 ## What are the benefits?
 
 1. Simplify the process of synchronizing elements. Give the engine the responsibility of taking care of element synchronization.
-2. Simple configuration: Using the.properties file, you may modify the number of attempts and timeout period to suit the specifics of your project.
-3. Reducing boilerplate code (see examples above)
-4. Production-ready: SonarQube/Lint is used to scan the code base, and integration testing has test coverage of up to 80%.
-5. You can now fully rely on the synchronization engine! This means that you no longer need to manually search for web elements using the `webDriver.findElement(...)` or `webDriver.findElements()` methods. The synchronization engine takes care of this for you automatically.
-6. Thread-safe: The synchronization engine is designed for simultaneous multi-threaded execution.
-7. Ease the development of Page Object Model classes; easier to read and maintain.
+2. Reduce drastically flaky test executions; elements are synchronized before performing the wanted action, and the retry mechanism will attempt to recover the execution.
+3. Simple configuration: Using the.properties file, you may modify the number of attempts and timeout period to suit the specifics of your project.
+4. Reducing boilerplate code (see examples above)
+5. Production-ready: SonarQube/Lint is used to scan the code base, and integration testing has test coverage of up to 80%.
+6. You can now fully rely on the synchronization engine! This means that you no longer need to manually search for web elements using the `webDriver.findElement(...)` or `webDriver.findElements()` methods. The synchronization engine takes care of this for you automatically.
+7. Thread-safe: The synchronization engine is designed for simultaneous multi-threaded execution.
+8. Ease the development of Page Object Model classes; easier to read and maintain.
 
 ```Java
 private final Synchronize synchronize;
