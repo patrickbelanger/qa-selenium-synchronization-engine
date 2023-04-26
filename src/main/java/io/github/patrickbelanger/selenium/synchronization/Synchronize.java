@@ -36,6 +36,11 @@ public class Synchronize {
 		this.webDriver = webDriver;
 	}
 	
+	/**
+	 * Perform synchronization until an alert is present
+	 * 
+	 * @return {@link Alert} Instance of the alert, allowing to interact with it (i.e., accept, dismiss, get text, send keys).
+	 */
 	public Alert synchronizeAlert() {
 		try {
   		return ((SynchronizationEngine) 
@@ -48,6 +53,15 @@ public class Synchronize {
 		}
 	}
 	
+	/**
+	 * Perform synchronization until the driver is returned (e.g., the given frame is available to switch to, the driver
+	 * instance with that context will be returned).
+	 *  
+	 * @param synchronizationMethod {@link SynchronizationMethods} Synchronization method returning a WebDriver instance
+	 * @param object {@link By} locator or {@link WebElement} webElement.
+	 * @return {@link WebDriver} Instance of the webdriver with the new context
+	 * 
+	 */
 	public WebDriver synchronizeWebDriverInstance(SynchronizationMethods synchronizationMethod, Object object) {
 		if (!isSynchronizationClassTypeWebDriver(synchronizationMethod)) {
 			throw new IncompatibleSynchronizationMethodClassTypeReturnException(
